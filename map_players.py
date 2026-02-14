@@ -85,7 +85,7 @@ def main():
         else:
             # difflib.get_close_matches returns a list of best matches
             # cutoff=0.85 is a strict threshold to avoid false positives
-            matches = difflib.get_close_matches(scraped_name, github_names_original, n=1, cutoff=0.85)
+            matches = difflib.get_close_matches(scraped_name, github_names_original, n=1, cutoff=0.90)
             if matches:
                  best_match = matches[0]
                  pid = github_lookup[best_match.lower()]

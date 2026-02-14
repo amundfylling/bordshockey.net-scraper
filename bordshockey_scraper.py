@@ -126,7 +126,7 @@ def _scrape_group_page(
     """Return rows from one 'Tabell och matcher' page."""
     soup  = _get_soup(session, url)
     stage = _slug_after_resultat(url)
-    stage_id = _generate_id(f"{t_name}_{stage}")
+    stage_id = None
     
     out   : List[List] = []
 
@@ -183,7 +183,7 @@ def _scrape_playoff_page(
         round_header = pr.select_one("h3")
         sub_stage    = round_header.get_text(strip=True) if round_header else ""
         stage_name   = f"{stage_slug} {sub_stage}".strip()
-        stage_id = _generate_id(f"{t_name}_{stage_name}")
+        stage_id = None
 
         table = pr.select_one("table.playoff_round")
         if not table:
@@ -232,7 +232,7 @@ def _tournament_meta(session: requests.Session, result_url: str) -> tuple[str, s
     soup = _get_soup(session, base)
     name = soup.select_one("h1").get_text(strip=True)
     date_iso = _parse_date_sv(soup.get_text(" ")) or ""
-    t_id = _generate_id(f"{name}_{date_iso}")
+    t_id = None
     return name, date_iso, t_id
 
 # -----------------------------------------------------------------------------------------------
