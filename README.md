@@ -5,7 +5,8 @@ This project scrapes table hockey tournament results from [bordshockey.net](http
 ## Features
 
 - **Automated Scraping:** Fetches tournament data including match results, stages, and dates.
-- **Incremental Updates:** Checks existing data to only scrape new tournaments.
+- **Incremental Updates:** Checks existing result URLs to only scrape new tournaments when the CSV already has the current schema.
+- **Source Links and IDs:** Writes stable tournament/stage IDs, source URLs, source match IDs when available, and explicit stage type.
 - **Player Mapping:** Maps scraped player names to canonical PlayerIDs using exact matching, fuzzy matching (difflib), and manual overrides.
 - **GitHub Actions:** Automated weekly workflow to keep the dataset up-to-date.
 
@@ -32,7 +33,21 @@ pip install -r requirements.txt
 To scrape new tournaments and append them to the results:
 
 ```bash
-python bordshockey_scraper.py
+python3 bordshockey_scraper.py
+```
+
+If the existing CSV is missing required schema fields, the scraper refuses to append partial rows and rebuilds the archive instead. You can force a full rebuild explicitly:
+
+```bash
+python3 bordshockey_scraper.py --rebuild
+```
+
+To validate one or more specific tournament/result/stage URLs without touching the production CSV, write to a temporary file:
+
+```bash
+python3 bordshockey_scraper.py --csv /tmp/bordshockey_sample_results.csv --rebuild \
+  --url "https://bordshockey.net/tavlingar/2526/swedish-masters/resultat/qualification-groups/grupp-1/?matcher=1" \
+  --url "https://bordshockey.net/tavlingar/2526/swedish-masters/resultat/playoff-a/"
 ```
 
 ### Updating Player Mappings
@@ -40,8 +55,19 @@ python bordshockey_scraper.py
 To regenerate the player mapping file (e.g., after updating `manual_mapping.json`):
 
 ```bash
-python map_players.py
+python3 map_players.py
 ```
+
+## Output Schema
+
+The CSV keeps the original Scorpion-compatible columns and appends:
+
+```text
+StageType, TournamentURL, ResultURL, StageURL, SourceURL, Source,
+SourceTournamentID, SourceStageID, SourceMatchID
+```
+
+`StageType` is `round-robin` or `playoff`. `TournamentURL`, `ResultURL`, `StageURL`, and `SourceURL` link rows back to bordshockey.net. `TournamentID` and `StageID` are stable generated/source-backed IDs; raw bordshockey IDs are preserved in `SourceTournamentID`, `SourceStageID`, and `SourceMatchID` where available.
 
 ## Configuration
 
