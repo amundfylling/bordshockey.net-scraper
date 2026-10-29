@@ -87,7 +87,7 @@ Name entries only apply to tournament entries without a usable ITHF id, and a na
 
 ### Players Scorpion does not have
 
-`ITHF_ONLY_ID_OFFSET` in `map_players.py` gives players with an ITHF id but no Scorpion record `PlayerID = offset + ITHF id`. It is `None` (leave them unmapped) by default.
+`ITHF_ONLY_ID_OFFSET` in `map_players.py` gives players with an ITHF id but no Scorpion record `PlayerID = offset + ITHF id`. It is 1,000,000; set it to `None` to leave them unmapped.
 
 ## Automation
 
