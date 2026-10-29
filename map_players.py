@@ -1,3 +1,4 @@
+import numpy as np
 import pandas as pd
 import json
 import difflib
@@ -10,6 +11,7 @@ GITHUB_CSV = "players_data.csv"
 MANUAL_MAPPING_FILE = "manual_mapping.json"
 OUTPUT_MAPPING_CSV = "player_id_map.csv"
 UNMAPPED_CSV = "unmapped_players.csv"
+FUZZY_CUTOFF = 0.90
 # ---------------------
 
 def load_manual_mapping(filepath):
@@ -21,6 +23,43 @@ def load_manual_mapping(filepath):
         except json.JSONDecodeError:
             print(f"Warning: Could not decode {filepath}. Starting with empty manual map.", file=sys.stderr)
     return {}
+
+class FuzzyMatcher:
+    """
+    Exact drop-in for difflib.get_close_matches(name, names, n=1, cutoff=cutoff), but faster.
+
+    get_close_matches skips any candidate whose real_quick_ratio() or quick_ratio() (both upper
+    bounds on ratio(), computed from lengths and shared character counts) is below the cutoff.
+    We compute those same bounds for all candidates at once with numpy, then let
+    get_close_matches judge only the survivors. Duplicate names are dropped; they can't change
+    the best match.
+    """
+
+    def __init__(self, names, cutoff=FUZZY_CUTOFF):
+        self.cutoff = cutoff
+        self.names = list(dict.fromkeys(names))
+        alphabet = sorted({ch for name in self.names for ch in name})
+        self.char_index = {ch: i for i, ch in enumerate(alphabet)}
+        self.counts = np.zeros((len(self.names), len(alphabet)), dtype=np.int32)
+        for row, name in enumerate(self.names):
+            for ch in name:
+                self.counts[row, self.char_index[ch]] += 1
+        self.lengths = np.array([len(name) for name in self.names], dtype=np.int64)
+
+    def match(self, name):
+        query = np.zeros(self.counts.shape[1], dtype=np.int32)
+        for ch in name:
+            i = self.char_index.get(ch)
+            if i is not None:  # characters no candidate has can't contribute matches
+                query[i] += 1
+        totals = self.lengths + len(name)
+        # Same formulas as difflib's real_quick_ratio() and quick_ratio().
+        with np.errstate(divide="ignore", invalid="ignore"):
+            real_quick = np.where(totals > 0, 2.0 * np.minimum(self.lengths, len(name)) / totals, 1.0)
+            quick = np.where(totals > 0, 2.0 * np.minimum(self.counts, query).sum(axis=1) / totals, 1.0)
+        keep = np.flatnonzero((real_quick >= self.cutoff) & (quick >= self.cutoff))
+        candidates = [self.names[i] for i in keep]
+        return difflib.get_close_matches(name, candidates, n=1, cutoff=self.cutoff)
 
 def main():
     # 1. Validation
@@ -41,13 +80,14 @@ def main():
     # Ideally we'd have more distinguishing info, but name is all we have from scraped data.
     github_lookup = {}
     github_names_original = [] # For fuzzy matching, keep original casing
-    
-    for _, row in github_df.iterrows():
-        name = str(row['Name']).strip()
-        pid = row['PlayerID']
+
+    for name, pid in zip(github_df['Name'], github_df['PlayerID']):
+        name = str(name).strip()
         if name and name.lower() != "nan":
             github_lookup[name.lower()] = pid
             github_names_original.append(name)
+
+    fuzzy = FuzzyMatcher(github_names_original)
 
     # 3. Load Manual Mapping
     manual_map = load_manual_mapping(MANUAL_MAPPING_FILE)
@@ -83,9 +123,9 @@ def main():
         
         # C. Fuzzy Match
         else:
-            # difflib.get_close_matches returns a list of best matches
-            # cutoff=0.85 is a strict threshold to avoid false positives
-            matches = difflib.get_close_matches(scraped_name, github_names_original, n=1, cutoff=0.90)
+            # Same result as difflib.get_close_matches(..., n=1, cutoff=0.90), see FuzzyMatcher
+            # cutoff=0.90 is a strict threshold to avoid false positives
+            matches = fuzzy.match(scraped_name)
             if matches:
                  best_match = matches[0]
                  pid = github_lookup[best_match.lower()]
