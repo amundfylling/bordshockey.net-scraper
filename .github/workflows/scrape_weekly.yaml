@@ -29,6 +29,14 @@ jobs:
       - name: Run Scraper
         run: python bordshockey_scraper.py
 
+      - name: Refresh Scorpion player data
+        run: curl -fsSL -o players_data.csv https://raw.githubusercontent.com/amundfylling/Scorpion-Scraper-2.0/main/data/players_data.csv
+        continue-on-error: true
+
+      - name: Fetch player ids from the resultat API
+        run: python fetch_api_player_ids.py
+        continue-on-error: true
+
       - name: Run Player Mapping
         run: python map_players.py
 
@@ -36,4 +44,4 @@ jobs:
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
           commit_message: "chore: weekly data update"
-          file_pattern: "bordshockey_results.csv player_id_map.csv unmapped_players.csv manual_mapping.json"
+          file_pattern: "bordshockey_results.csv player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json"
