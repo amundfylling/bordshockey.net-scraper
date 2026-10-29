@@ -302,7 +302,15 @@ def main(argv: Iterable[str] | None = None) -> int:
 
     player_map = _load_player_map()
     existing_df = _load_existing_csv(args.csv)
-    rebuild = args.rebuild or (not existing_df.empty and _needs_rebuild(existing_df))
+    existing_needs_rebuild = not existing_df.empty and _needs_rebuild(existing_df)
+    if existing_needs_rebuild and (args.season or only) and not args.rebuild:
+        print(
+            "Refusing to replace an incomplete existing CSV with a filtered fetch. "
+            "Use --rebuild to overwrite it, or pass --csv with a new/temporary output path.",
+            file=sys.stderr,
+        )
+        return 2
+    rebuild = args.rebuild or existing_needs_rebuild
 
     with requests.Session() as session:
         tournaments = discover_tournaments(session, seasons)

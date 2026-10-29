@@ -1,6 +1,12 @@
+import os
+import tempfile
 import unittest
+from unittest import mock
+
+import pandas as pd
 
 from bordshockey_scraper import _generate_id
+import resultat_api_scraper
 from resultat_api_scraper import ApiTournament, rows_from_group_stage, rows_from_playoff_stage
 
 
@@ -101,6 +107,20 @@ class PlayoffStageTests(unittest.TestCase):
         self.assertEqual(rows[1]["PlayoffGameNumber"], 2)
         self.assertEqual((rows[1]["Player1"], rows[1]["GoalsPlayer1"], rows[1]["GoalsPlayer2"]), ("Astrid Lindqvist", 1, 4))
         self.assertEqual(rows[1]["Overtime"], "Yes")
+
+
+class MainTests(unittest.TestCase):
+    def test_filtered_run_refuses_to_replace_incomplete_csv(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            path = os.path.join(tmp, "results.csv")
+            pd.DataFrame({"Player1": ["A"], "Player2": ["B"]}).to_csv(path, index=False)
+
+            with mock.patch.object(resultat_api_scraper, "discover_tournaments") as discover:
+                code = resultat_api_scraper.main(["--csv", path, "--season", "2526"])
+
+            self.assertEqual(code, 2)
+            discover.assert_not_called()
+            self.assertEqual(len(pd.read_csv(path)), 1)
 
 
 if __name__ == "__main__":
