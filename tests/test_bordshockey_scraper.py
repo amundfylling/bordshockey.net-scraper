@@ -1,9 +1,11 @@
 import unittest
+from unittest import mock
 
 import pandas as pd
 from bs4 import BeautifulSoup
 
 from bordshockey_scraper import (
+    OUTPUT_COLUMNS,
     StageMeta,
     TournamentMeta,
     _canonical_url,
@@ -11,6 +13,7 @@ from bordshockey_scraper import (
     _parse_result_overview,
     _rows_from_group_soup,
     _rows_from_playoff_soup,
+    scrape_tournament,
 )
 
 
@@ -233,6 +236,17 @@ class DedupeTests(unittest.TestCase):
 
         self.assertEqual(len(deduped), 1)
         self.assertEqual(deduped.iloc[0]["GoalsPlayer1"], 3)
+
+
+class IncrementalSkipTests(unittest.TestCase):
+    def test_existing_tournament_is_skipped_without_any_request(self):
+        session = mock.Mock()
+
+        df = scrape_tournament(RESULT_URL, session=session, existing_result_urls={_canonical_url(RESULT_URL)})
+
+        self.assertTrue(df.empty)
+        self.assertEqual(list(df.columns), OUTPUT_COLUMNS)
+        session.get.assert_not_called()
 
 
 if __name__ == "__main__":
