@@ -8,7 +8,7 @@ This project scrapes table hockey tournament results from [bordshockey.net](http
 - **Incremental Updates:** Checks existing result URLs to only scrape new tournaments when the CSV already has the current schema.
 - **Source Links and IDs:** Writes stable tournament/stage IDs, source URLs, source match IDs when available, and explicit stage type.
 - **Player Mapping:** Maps players to canonical Scorpion PlayerIDs, first by the ITHF id that the resultat.bordshockey.se API gives each tournament participant, then by exact matching, fuzzy matching (difflib), and manual overrides.
-- **GitHub Actions:** Automated weekly workflow to keep the dataset up-to-date.
+- **GitHub Actions:** Automated daily workflow to keep the dataset up-to-date.
 
 ## Files
 
@@ -17,7 +17,7 @@ This project scrapes table hockey tournament results from [bordshockey.net](http
 - `compare_results.py`: Diffs two results CSVs, e.g. the HTML scraper's and the API fetcher's.
 - `fetch_api_player_ids.py`: Fetches the ITHF and SBHF ids of every participant in the results' tournaments from the resultat API into `api_player_ids.csv` (only tournaments not cached yet).
 - `map_players.py`: Matches every player entry (one name in one tournament) against `players_data.csv` and writes `player_entry_map.csv`, `player_id_map.csv`, `unmapped_players.csv` and the `Player1ID`/`Player2ID` columns of `bordshockey_results.csv`.
-- `players_data.csv`: Scorpion player list (refreshed weekly from Scorpion-Scraper-2.0). Its `RankingID` is the ITHF id.
+- `players_data.csv`: Scorpion player list (refreshed daily from Scorpion-Scraper-2.0). Its `RankingID` is the ITHF id.
 - `api_player_ids.csv`: Cached API participant ids per tournament.
 - `player_entry_map.csv`: The generated mapping of (SourceTournamentID, PlayerName) -> ITHF, SBHF, PlayerID and match method.
 - `manual_mapping.json`: JSON file for manually correcting or ignoring player mappings.
@@ -110,4 +110,4 @@ Name entries only apply to tournament entries without a usable ITHF id, and a na
 
 ## Automation
 
-The `.github/workflows/scrape_weekly.yaml` workflow allows this scraper to run automatically every Monday at 18:00 UTC. It commits any new data and mappings back to the repository.
+The `.github/workflows/scrape_daily.yaml` workflow runs `resultat_api_scraper.py` automatically every day at 18:00 UTC. Team tournaments are skipped. It commits any new data and mappings back to the repository.

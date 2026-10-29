@@ -74,7 +74,7 @@ def list_seasons(session: requests.Session) -> list[str]:
 
 
 def list_tournaments(session: requests.Session, season: str) -> list[ApiTournament]:
-    """Finished tournaments with results in one season."""
+    """Finished individual (non-team) tournaments with results in one season."""
     return [
         ApiTournament(
             id=t["id"],
@@ -84,7 +84,7 @@ def list_tournaments(session: requests.Session, season: str) -> list[ApiTourname
             start_date=t["startDate"] or "",
         )
         for t in _get_json(session, "/tournaments", {"season": season})
-        if t.get("hasResults") and t.get("isFinished") and not t.get("external")
+        if t.get("hasResults") and t.get("isFinished") and not t.get("external") and not t.get("isTeam")
     ]
 
 
