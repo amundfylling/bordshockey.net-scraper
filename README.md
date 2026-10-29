@@ -13,6 +13,8 @@ This project scrapes table hockey tournament results from [bordshockey.net](http
 ## Files
 
 - `bordshockey_scraper.py`: The main scraping script.
+- `resultat_api_scraper.py`: Alternative fetcher that reads the JSON API behind resultat.bordshockey.se instead of parsing HTML. Same CSV schema.
+- `compare_results.py`: Diffs two results CSVs, e.g. the HTML scraper's and the API fetcher's.
 - `map_players.py`: Script to generate `player_id_map.csv` by matching `players.csv` against `players_data.csv`.
 - `manual_mapping.json`: JSON file for manually correcting or ignoring player mappings.
 - `bordshockey_results.csv`: The primary output dataset containing all match results.
@@ -49,6 +51,23 @@ python3 bordshockey_scraper.py --csv /tmp/bordshockey_sample_results.csv --rebui
   --url "https://bordshockey.net/tavlingar/2526/swedish-masters/resultat/qualification-groups/grupp-1/?matcher=1" \
   --url "https://bordshockey.net/tavlingar/2526/swedish-masters/resultat/playoff-a/"
 ```
+
+### Fetching from the resultat API
+
+resultat.bordshockey.net (which redirects to resultat.bordshockey.se) is backed by a public JSON API ([docs](https://resultat.bordshockey.se/api-docs.html)) on the same database as bordshockey.net. `resultat_api_scraper.py` lists every finished tournament per season and reads its stages and matches from the API, writing the same CSV schema:
+
+```bash
+python3 resultat_api_scraper.py                       # append tournaments not yet in the CSV
+python3 resultat_api_scraper.py --season 2627         # only one season
+python3 resultat_api_scraper.py --csv /tmp/api.csv --rebuild --only 2526/swedish-masters
+```
+
+Compared with the HTML scraper on all 298 tournaments in `bordshockey_results.csv`, every existing row is reproduced with identical goals, overtime, StageID, StageSequence, StageType, Date, TournamentID, SourceStageID and SourceMatchID. Differences:
+
+- The API has results for about 3,500 tournaments (local leagues and class variants such as `_junior`), not only the ones linked from the bordshockey.net archive page.
+- It finds 277 matches the HTML scraper misses: single-group stages named "slutspel" that are round robins (e.g. `0910/oresund-cup` B-slutspel).
+- Playoff games get a SourceMatchID.
+- Stage and tournament names follow the new site, which renamed some of them: "B-Playoff" is now "B-slutspel", English stage names are Swedish, and "Svenska Mästerskapen" is "SM".
 
 ### Updating Player Mappings
 
