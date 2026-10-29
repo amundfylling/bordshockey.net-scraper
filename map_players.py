@@ -22,6 +22,7 @@ import re
 import sys
 import unicodedata
 
+import numpy as np
 import pandas as pd
 
 # --- Configuration ---
@@ -36,6 +37,7 @@ UNMAPPED_CSV = "unmapped_players.csv"
 # None leaves them unmapped. Scorpion PlayerIDs (< 20,000) and ITHF ids (< 1,000,000)
 # keep this range apart.
 ITHF_ONLY_ID_OFFSET = 1_000_000
+FUZZY_CUTOFF = 0.90
 # ---------------------
 
 MANUAL_ITHF_PREFIX = "ithf:"
@@ -76,6 +78,44 @@ def _id_text(value):
         return text
 
 
+class FuzzyMatcher:
+    """
+    Exact drop-in for difflib.get_close_matches(name, names, n=1, cutoff=cutoff), but faster.
+
+    get_close_matches skips any candidate whose real_quick_ratio() or quick_ratio() (both upper
+    bounds on ratio(), computed from lengths and shared character counts) is below the cutoff.
+    We compute those same bounds for all candidates at once with numpy, then let
+    get_close_matches judge only the survivors. Duplicate names are dropped; they can't change
+    the best match.
+    """
+
+    def __init__(self, names, cutoff=FUZZY_CUTOFF):
+        self.cutoff = cutoff
+        self.names = list(dict.fromkeys(names))
+        alphabet = sorted({ch for name in self.names for ch in name})
+        self.char_index = {ch: i for i, ch in enumerate(alphabet)}
+        self.counts = np.zeros((len(self.names), len(alphabet)), dtype=np.int32)
+        for row, name in enumerate(self.names):
+            for ch in name:
+                self.counts[row, self.char_index[ch]] += 1
+        self.lengths = np.array([len(name) for name in self.names], dtype=np.int64)
+
+    def match(self, name):
+        query = np.zeros(self.counts.shape[1], dtype=np.int32)
+        for ch in name:
+            i = self.char_index.get(ch)
+            if i is not None:  # characters no candidate has can't contribute matches
+                query[i] += 1
+        totals = self.lengths + len(name)
+        # Same formulas as difflib's real_quick_ratio() and quick_ratio().
+        with np.errstate(divide="ignore", invalid="ignore"):
+            real_quick = np.where(totals > 0, 2.0 * np.minimum(self.lengths, len(name)) / totals, 1.0)
+            quick = np.where(totals > 0, 2.0 * np.minimum(self.counts, query).sum(axis=1) / totals, 1.0)
+        keep = np.flatnonzero((real_quick >= self.cutoff) & (quick >= self.cutoff))
+        candidates = [self.names[i] for i in keep]
+        return difflib.get_close_matches(name, candidates, n=1, cutoff=self.cutoff)
+
+
 def map_names(names, github_df, manual_map):
     """The name-only mapping: {name: (PlayerID or None, method, matched name)} for mapped names."""
     # Dictionary: {lowercase_name: PlayerID}
@@ -85,13 +125,14 @@ def map_names(names, github_df, manual_map):
     github_names_original = [] # For fuzzy matching, keep original casing
     folded_lookup = {} # {folded_name: {PlayerID, ...}}
 
-    for _, row in github_df.iterrows():
-        name = str(row['Name']).strip()
-        pid = row['PlayerID']
+    for name, pid in zip(github_df['Name'], github_df['PlayerID']):
+        name = str(name).strip()
         if name and name.lower() != "nan":
             github_lookup[name.lower()] = pid
             github_names_original.append(name)
             folded_lookup.setdefault(fold_name(name), set()).add(pid)
+
+    fuzzy = FuzzyMatcher(github_names_original)
 
     mapped = {}
     for scraped_name in names:
@@ -112,8 +153,9 @@ def map_names(names, github_df, manual_map):
 
         # D. Fuzzy Match
         else:
+            # Same result as difflib.get_close_matches(..., n=1, cutoff=0.90), see FuzzyMatcher
             # cutoff=0.90 is a strict threshold to avoid false positives
-            matches = difflib.get_close_matches(scraped_name, github_names_original, n=1, cutoff=0.90)
+            matches = fuzzy.match(scraped_name)
             if matches:
                 best_match = matches[0]
                 mapped[scraped_name] = (github_lookup[best_match.lower()], "Fuzzy", best_match)

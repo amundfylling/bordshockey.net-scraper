@@ -5,8 +5,9 @@ import hashlib
 import os
 import re
 import sys
+import threading
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from datetime import date
 from functools import partial
 from typing import Iterable
@@ -533,19 +534,13 @@ def _scrape_group_page(
     session: requests.Session,
     stage: StageMeta,
     tournament: TournamentMeta,
+    soup: BeautifulSoup | None = None,
 ) -> list[dict[str, object]]:
-    soup = _get_soup(session, stage.stage_url)
-    inferred = stage
+    if soup is None:
+        soup = _get_soup(session, stage.stage_url)
     if stage.stage_type != "round-robin":
-        inferred = StageMeta(
-            name=stage.name,
-            stage_type="round-robin",
-            stage_url=stage.stage_url,
-            stage_id=stage.stage_id,
-            stage_sequence=stage.stage_sequence,
-            source_stage_id=stage.source_stage_id,
-        )
-    return _rows_from_group_soup(soup, inferred, tournament)
+        stage = replace(stage, stage_type="round-robin")
+    return _rows_from_group_soup(soup, stage, tournament)
 
 
 def _rows_from_playoff_soup(
@@ -605,20 +600,19 @@ def _scrape_playoff_page(
     session: requests.Session,
     stage: StageMeta,
     tournament: TournamentMeta,
+    soup: BeautifulSoup | None = None,
 ) -> list[dict[str, object]]:
-    soup = _get_soup(session, stage.stage_url)
-    inferred = stage
+    if soup is None:
+        soup = _get_soup(session, stage.stage_url)
     source_stage_id = stage.source_stage_id or _class_id(soup.select_one("div.stage"), "stage-", STAGE_CLASS_RX)
     if stage.stage_type != "playoff" or source_stage_id != stage.source_stage_id:
-        inferred = StageMeta(
-            name=stage.name,
+        stage = replace(
+            stage,
             stage_type="playoff",
-            stage_url=stage.stage_url,
             stage_id=_stage_id_for_url(stage.stage_url, source_stage_id, direct_source_stage=True),
-            stage_sequence=stage.stage_sequence,
             source_stage_id=source_stage_id,
         )
-    return _rows_from_playoff_soup(soup, inferred, tournament)
+    return _rows_from_playoff_soup(soup, stage, tournament)
 
 
 # --------------------------------------------------------------------------- #
@@ -650,26 +644,38 @@ def _tournament_meta(session: requests.Session, result_url: str) -> TournamentMe
 # scrape helpers
 # -----------------------------------------------------------------------------------------------
 
+_thread_local = threading.local()
+
+
+def _thread_session() -> requests.Session:
+    """One Session per worker thread, so keep-alive connections are reused across tournaments."""
+    session = getattr(_thread_local, "session", None)
+    if session is None:
+        session = requests.Session()
+        _thread_local.session = session
+    return session
+
+
 def _scrape_tournament_thread(result_url: str, existing_result_urls: set[str] | None = None) -> pd.DataFrame:
-    """Worker wrapper that creates its own Session and calls scrape_tournament."""
-    with requests.Session() as sess:
-        return scrape_tournament(result_url, session=sess, existing_result_urls=existing_result_urls)
+    """Worker wrapper that reuses its thread's Session and calls scrape_tournament."""
+    return scrape_tournament(result_url, session=_thread_session(), existing_result_urls=existing_result_urls)
 
 
 def _stage_meta_for_url(
     session: requests.Session,
     stage_url: str,
     tournament: TournamentMeta,
-) -> StageMeta:
+) -> tuple[StageMeta, BeautifulSoup | None]:
+    """Return the stage meta, plus the stage page soup if it had to be fetched to infer it."""
     overview = _get_soup(session, tournament.result_url)
     stages = _parse_result_overview(overview, tournament.result_url)
     canonical = _canonical_url(stage_url)
     for stage in stages:
         if stage.stage_url == canonical:
-            return stage
+            return stage, None
 
     stage_soup = _get_soup(session, canonical)
-    return _infer_stage_meta(canonical, stage_soup)
+    return _infer_stage_meta(canonical, stage_soup), stage_soup
 
 
 # --------------------------------------------------------------------------- #
@@ -692,10 +698,11 @@ def scrape_tournament(
         own = True
 
     try:
-        tournament = _tournament_meta(session, result_url)
-        if existing_result_urls is not None and tournament.result_url in existing_result_urls:
+        # The result URL is derived from the input URL alone, so skip before fetching anything.
+        if existing_result_urls is not None and _result_url_from_any(result_url) in existing_result_urls:
             return pd.DataFrame(columns=OUTPUT_COLUMNS)
 
+        tournament = _tournament_meta(session, result_url)
         overview = _get_soup(session, tournament.result_url)
         stages = _parse_result_overview(overview, tournament.result_url)
 
@@ -727,12 +734,12 @@ def scrape_url(url: str, session: requests.Session | None = None) -> pd.DataFram
             return scrape_tournament(result_url, session=session)
 
         tournament = _tournament_meta(session, result_url)
-        stage = _stage_meta_for_url(session, canonical, tournament)
+        stage, stage_soup = _stage_meta_for_url(session, canonical, tournament)
 
         if stage.stage_type == "playoff":
-            rows = _scrape_playoff_page(session, stage, tournament)
+            rows = _scrape_playoff_page(session, stage, tournament, soup=stage_soup)
         else:
-            rows = _scrape_group_page(session, stage, tournament)
+            rows = _scrape_group_page(session, stage, tournament, soup=stage_soup)
 
         return pd.DataFrame(rows, columns=OUTPUT_COLUMNS)
     finally:
@@ -753,7 +760,10 @@ def scrape_archive(max_workers: int = 12, existing_result_urls: set[str] | None 
     else:
         print(f"Found {len(urls):,} tournaments - scraping ...", file=sys.stderr)
 
-    frames: list[pd.DataFrame] = []
+    if existing_result_urls:
+        urls = [u for u in urls if _result_url_from_any(u) not in existing_result_urls]
+
+    results: dict[str, pd.DataFrame] = {}
     worker = partial(_scrape_tournament_thread, existing_result_urls=existing_result_urls)
 
     with ThreadPoolExecutor(max_workers=max_workers) as pool:
@@ -767,10 +777,12 @@ def scrape_archive(max_workers: int = 12, existing_result_urls: set[str] | None 
         ):
             url = future_to_url[fut]
             try:
-                frames.append(fut.result())
+                results[url] = fut.result()
             except Exception as exc:
                 print(f"[ERROR] {url} -> {exc}", file=sys.stderr)
 
+    # Concatenate in archive order (not completion order) so the output is deterministic.
+    frames = [results[u] for u in urls if u in results]
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=OUTPUT_COLUMNS)
 
 
@@ -785,8 +797,8 @@ def _load_player_map(path: str = PLAYER_MAP_FILE) -> dict[str, object]:
 
     try:
         pm_df = pd.read_csv(path)
-        for _, row in pm_df.iterrows():
-            player_map[str(row["ScrapedName"]).strip()] = row["PlayerID"]
+        for name, player_id in zip(pm_df["ScrapedName"], pm_df["PlayerID"]):
+            player_map[str(name).strip()] = player_id
         print(f"Loaded {len(player_map)} player mappings.")
     except Exception as exc:
         print(f"Warning: Could not load player map: {exc}", file=sys.stderr)
@@ -811,7 +823,8 @@ def _needs_rebuild(df: pd.DataFrame) -> bool:
         return True
 
     for col in REQUIRED_POPULATED_COLUMNS:
-        if df[col].map(_blankish).any():
+        # Vectorized equivalent of df[col].map(_blankish).any()
+        if df[col].isna().any() or df[col].astype(str).str.strip().eq("").any():
             print(
                 f"Existing CSV has blank values in {col}; rebuilding instead of appending.",
                 file=sys.stderr,
@@ -821,28 +834,35 @@ def _needs_rebuild(df: pd.DataFrame) -> bool:
     return False
 
 
-def _dedupe_key(row: pd.Series) -> tuple[object, ...]:
-    source_match_id = _key_text(row.get("SourceMatchID"))
+MATCH_TUPLE_KEY_COLUMNS = [
+    "TournamentID",
+    "StageID",
+    "StageURL",
+    "RoundNumber",
+    "PlayoffGameNumber",
+    "Player1",
+    "Player2",
+    "GoalsPlayer1",
+    "GoalsPlayer2",
+]
+
+
+def _dedupe_key_from_values(
+    source_match_id: object,
+    source: object,
+    source_tournament_id: object,
+    match_tuple: tuple[object, ...],
+) -> tuple[object, ...]:
+    source_match_id = _key_text(source_match_id)
     if source_match_id is not None:
         return (
             "source-match",
-            _key_text(row.get("Source")),
-            _key_text(row.get("SourceTournamentID")),
+            _key_text(source),
+            _key_text(source_tournament_id),
             source_match_id,
         )
 
-    return (
-        "match-tuple",
-        row.get("TournamentID"),
-        row.get("StageID"),
-        row.get("StageURL"),
-        row.get("RoundNumber"),
-        row.get("PlayoffGameNumber"),
-        row.get("Player1"),
-        row.get("Player2"),
-        row.get("GoalsPlayer1"),
-        row.get("GoalsPlayer2"),
-    )
+    return ("match-tuple", *match_tuple)
 
 
 def _deduplicate_results(df: pd.DataFrame) -> pd.DataFrame:
@@ -850,7 +870,20 @@ def _deduplicate_results(df: pd.DataFrame) -> pd.DataFrame:
         return _ensure_output_schema(df)
 
     out = _ensure_output_schema(df)
-    keys = out.apply(_dedupe_key, axis=1)
+    # Column-wise zip instead of DataFrame.apply(axis=1): same keys, without building a Series per row.
+    keys = pd.Series(
+        [
+            _dedupe_key_from_values(smid, src, stid, match_tuple)
+            for smid, src, stid, match_tuple in zip(
+                out["SourceMatchID"],
+                out["Source"],
+                out["SourceTournamentID"],
+                zip(*(out[col] for col in MATCH_TUPLE_KEY_COLUMNS)),
+            )
+        ],
+        index=out.index,
+        dtype=object,
+    )
     out = out.loc[~keys.duplicated(keep="last")].copy()
     return out.reset_index(drop=True)
 
