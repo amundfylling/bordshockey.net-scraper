@@ -11,8 +11,8 @@ import sys
 
 import pandas as pd
 
-MATCH_KEY = ["SourceTournamentID", "StageURL", "Stage", "RoundNumber", "PlayoffGameNumber", "Player1", "Player2"]
-VALUE_COLUMNS = ["GoalsPlayer1", "GoalsPlayer2", "Overtime", "StageID", "StageSequence", "StageType",
+MATCH_KEY = ["SourceTournamentID", "StageURL", "RoundNumber", "PlayoffGameNumber", "Player1", "Player2"]
+VALUE_COLUMNS = ["Stage", "GoalsPlayer1", "GoalsPlayer2", "Overtime", "StageID", "StageSequence", "StageType",
                  "Date", "TournamentName", "TournamentID", "SourceStageID", "SourceMatchID"]
 
 
@@ -52,6 +52,8 @@ def main(old_path: str, new_path: str) -> int:
     only_new = merged[merged._merge == "right_only"]
     _show("rows only in old", only_old[key + ["GoalsPlayer1_old", "GoalsPlayer2_old"]])
     _show("rows only in new", only_new[key + ["GoalsPlayer1_new", "GoalsPlayer2_new"]])
+    _show("rows only in old (tournaments with extra new rows)", only_old[only_old.SourceTournamentID.isin(per_t.index[per_t["diff"] != 0])][key + ["GoalsPlayer1_old", "GoalsPlayer2_old"]], 40)
+    _show("rows only in new (tournaments with extra new rows)", only_new[only_new.SourceTournamentID.isin(per_t.index[per_t["diff"] != 0])][key + ["Stage_new", "GoalsPlayer1_new", "GoalsPlayer2_new"]], 60)
     print("\nonly-old by tournament:\n", only_old.SourceTournamentID.value_counts().head(30).to_string())
     print("\nonly-new by tournament:\n", only_new.SourceTournamentID.value_counts().head(30).to_string())
 
