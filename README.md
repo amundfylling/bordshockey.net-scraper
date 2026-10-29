@@ -64,7 +64,7 @@ python3 resultat_api_scraper.py --csv /tmp/api.csv --rebuild --only 2526/swedish
 
 Compared with the HTML scraper on all 298 tournaments in `bordshockey_results.csv`, every existing row is reproduced with identical goals, overtime, StageID, StageSequence, StageType, Date, TournamentID, SourceStageID and SourceMatchID. Differences:
 
-- The API covers about 3,600 tournaments (local leagues and class variants such as `_junior`), not only the ones linked from the bordshockey.net archive page.
+- The API has results for about 3,500 tournaments (local leagues and class variants such as `_junior`), not only the ones linked from the bordshockey.net archive page.
 - It finds 277 matches the HTML scraper misses: single-group stages named "slutspel" that are round robins (e.g. `0910/oresund-cup` B-slutspel).
 - Playoff games get a SourceMatchID.
 - Stage and tournament names follow the new site, which renamed some of them: "B-Playoff" is now "B-slutspel", English stage names are Swedish, and "Svenska Mästerskapen" is "SM".
