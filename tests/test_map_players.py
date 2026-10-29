@@ -7,9 +7,9 @@ from map_players import apply_entry_map, attach_api_ids, map_entries, map_names
 
 GITHUB = pd.DataFrame(
     {
-        "PlayerID": [1, 2, 3, 4, 5, 6],
-        "Name": ["Johan Johansson", "Johan Johansson", "Kimmo Eriksson", "Erik Lund", "Twin A", "Twin B"],
-        "RankingID": [None, 665520.0, 654720.0, None, 700000.0, 700000.0],
+        "PlayerID": [1, 2, 3, 4, 5, 6, 7],
+        "Name": ["Johan Johansson", "Johan Johansson", "Kimmo Eriksson", "Erik Lund", "Twin A", "Twin B", "Martin Vojáček"],
+        "RankingID": [None, 665520.0, 654720.0, None, 700000.0, 700000.0, None],
     }
 )
 
@@ -71,6 +71,10 @@ class MapEntriesTests(unittest.TestCase):
     def test_name_match_without_ranking_id_is_kept(self):
         out = mapped(entries(("t1", "Erik Lund", 5, "123", None), ("t2", "Erik Lund", 1, None, None)))
         self.assertEqual(out["PlayerID"].tolist(), [4, 4])
+
+    def test_accent_folded_name_beats_ithf_only_id(self):
+        out = mapped(entries(("t1", "Martin Vojacek", 5, "670657", None)), offset=1_000_000)
+        self.assertEqual((out["PlayerID"][0], out["Method"][0]), (7, "Folded"))
 
     def test_one_ithf_player_per_name_matched_profile(self):
         out = mapped(entries(("t1", "Erik Lund", 5, "123", None), ("t2", "Erik Lund", 2, "456", None)))

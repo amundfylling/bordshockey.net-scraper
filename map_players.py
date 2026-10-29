@@ -6,7 +6,7 @@ Each player entry (one player name in one tournament) is matched in this order:
 1. Manual override by ITHF id ("ithf:<id>" keys in manual_mapping.json).
 2. The entry's ITHF id from the resultat API (api_player_ids.csv) to the Scorpion
    player with that RankingID.
-3. The name mapping (manual by name, exact, then fuzzy), unless the Scorpion
+3. The name mapping (manual by name, exact, accent-folded, then fuzzy), unless the Scorpion
    player it points to has a different RankingID than the entry's ITHF id.
 4. Optionally, for players Scorpion does not have: ITHF_ONLY_ID_OFFSET + ITHF id.
 
@@ -20,6 +20,7 @@ import json
 import os
 import re
 import sys
+import unicodedata
 
 import pandas as pd
 
@@ -55,6 +56,13 @@ def norm_name(name):
     return re.sub(r"\s+", " ", str(name).strip()).casefold()
 
 
+def fold_name(name):
+    """Name without accents, case or punctuation (as the h2h site's unique-name lookup)."""
+    text = unicodedata.normalize("NFKD", str(name).strip())
+    text = "".join(ch for ch in text if not unicodedata.combining(ch)).casefold()
+    return re.sub(r"[\W_]+", " ", text).strip()
+
+
 def _id_text(value):
     """'672107', 672107 and 672107.0 all become '672107'; blanks become None."""
     if value is None or pd.isna(value):
@@ -75,6 +83,7 @@ def map_names(names, github_df, manual_map):
     # The ITHF id step in map_entries takes precedence where the API knows the player.
     github_lookup = {}
     github_names_original = [] # For fuzzy matching, keep original casing
+    folded_lookup = {} # {folded_name: {PlayerID, ...}}
 
     for _, row in github_df.iterrows():
         name = str(row['Name']).strip()
@@ -82,6 +91,7 @@ def map_names(names, github_df, manual_map):
         if name and name.lower() != "nan":
             github_lookup[name.lower()] = pid
             github_names_original.append(name)
+            folded_lookup.setdefault(fold_name(name), set()).add(pid)
 
     mapped = {}
     for scraped_name in names:
@@ -95,7 +105,12 @@ def map_names(names, github_df, manual_map):
         elif scraped_lower in github_lookup:
             mapped[scraped_name] = (github_lookup[scraped_lower], "Exact", scraped_name)
 
-        # C. Fuzzy Match
+        # C. Same name without accents/punctuation, if only one player has it
+        elif len(folded_lookup.get(fold_name(scraped_name), ())) == 1:
+            pid = next(iter(folded_lookup[fold_name(scraped_name)]))
+            mapped[scraped_name] = (pid, "Folded", scraped_name)
+
+        # D. Fuzzy Match
         else:
             # cutoff=0.90 is a strict threshold to avoid false positives
             matches = difflib.get_close_matches(scraped_name, github_names_original, n=1, cutoff=0.90)
@@ -179,7 +194,7 @@ def map_entries(entries, github_df, name_map, manual_map, ithf_only_offset=ITHF_
 
     # A name-matched Scorpion player without RankingID should be one ITHF player.
     # If entries with different ITHF ids landed on it, keep the id with the most rows.
-    by_name = out[out["Method"].isin(["Manual", "Exact", "Fuzzy"]) & out["ITHF"].notna()]
+    by_name = out[out["Method"].isin(["Manual", "Exact", "Folded", "Fuzzy"]) & out["ITHF"].notna()]
     for pid, group in by_name.groupby("PlayerID"):
         if group["ITHF"].nunique() < 2:
             continue

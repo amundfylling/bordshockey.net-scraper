@@ -1,17 +1,17 @@
 ﻿ScrapedName,PlayerID,Method,MatchedName
 Agne Bergmark,2904.0,Exact,Agne Bergmark
-Agris Pavars,14427.0,Fuzzy,Agris Pavārs
+Agris Pavars,14427.0,Folded,Agris Pavars
 Ahlberg Magnus,240.0,Exact,Ahlberg Magnus
 Ahti Lampi,9900.0,Exact,Ahti Lampi
 Aigars Romals,15500.0,Exact,Aigars Romals
 Alans Liepins,14693.0,Manual,Alans Liepins
 Aleksandr Metelitsa,4200.0,Exact,Aleksandr Metelitsa
 Aleksandr Tarakanov,1355.0,Exact,Aleksandr Tarakanov
-Aleksandrs Zernovojs,13651.0,Fuzzy,Aleksandrs Žernovojs
+Aleksandrs Zernovojs,13651.0,Folded,Aleksandrs Zernovojs
 Aleksi Eriksson,618.0,Exact,Aleksi Eriksson
-Alekss Skudritis,9897.0,Fuzzy,Alekss Skudrītis
+Alekss Skudritis,9897.0,Folded,Alekss Skudritis
 Alen Shekarev,3355.0,Exact,Alen Shekarev
-Ales Krejza,13520.0,Fuzzy,Aleš Krejza
+Ales Krejza,13520.0,Folded,Ales Krejza
 Alexander Galkin,9780.0,Exact,Alexander Galkin
 Alexander Hallenstam,4115.0,Exact,Alexander Hallenstam
 Alexander Liljemark,2945.0,Exact,Alexander Liljemark
@@ -59,14 +59,16 @@ Andreas Røren,1226.0,Exact,Andreas Røren
 Andrei Akinfin,3604.0,Exact,Andrei Akinfin
 Andrei Kniaziuk,456.0,Exact,Andrei Kniaziuk
 Andrej Oblak,10538.0,Exact,Andrej Oblak
-Andrejs Kuznecovs,3532.0,Fuzzy,Andrejs Kuzņecovs
+Andrejs Kuznecovs,3532.0,Folded,Andrejs Kuznecovs
 Andrey Polyakov,13206.0,Exact,Andrey Polyakov
 Andrey Voskoboynikov,7.0,Exact,Andrey Voskoboynikov
+Andris LIEPIŅŠ,907.0,Folded,Andris LIEPIŅŠ
 Andris Liepins,907.0,Exact,Andris Liepins
+András Naszádi,10137.0,Folded,András Naszádi
 Andzej Petrik,4756.0,Exact,Andzej Petrik
 Ane Skadsem,12993.0,Exact,Ane Skadsem
 Anette Engel,1252.0,Exact,Anette Engel
-Anna Holmström,6504.0,Fuzzy,Anna Holmstrom
+Anna Holmström,6504.0,Folded,Anna Holmström
 Anna Israelsson,13859.0,Manual,Anna Israelsson
 Anna-Karin Svensson,2008.0,Exact,Anna-Karin Svensson
 Anna-Maria Israelsson,13859.0,Exact,Anna-Maria Israelsson
@@ -74,7 +76,7 @@ Anna-Maria Wiberg,4130.0,Exact,Anna-Maria Wiberg
 Anne Grethe Gangsøy,1318.0,Exact,Anne Grethe Gangsøy
 Annika Gripp,5082.0,Exact,Annika Gripp
 Annika Persson,4053.0,Exact,Annika Persson
-Anssi Jarvinen,9824.0,Fuzzy,Anssi Järvinen
+Anssi Jarvinen,9824.0,Folded,Anssi Jarvinen
 Anssi Järvinen,9824.0,Exact,Anssi Järvinen
 Anton Freyr Jakobsson,2622.0,Exact,Anton Freyr Jakobsson
 Anton Hed,2223.0,Exact,Anton Hed
@@ -86,19 +88,21 @@ Anton Lampi,453.0,Exact,Anton Lampi
 Anton Runenkov,1366.0,Exact,Anton Runenkov
 Anton Umanskyy,1483.0,Exact,Anton Umanskyy
 Antti Suojanen,5434.0,Exact,Antti Suojanen
+Anze Bozic,10492.0,Folded,Anze Bozic
 Anže Božič,10492.0,Exact,Anže Božič
 Arne Johannes Holmin,1243.0,Exact,Arne Johannes Holmin
-Arnis Vitols,1295.0,Fuzzy,Arnis Vītols
+Arnis Vitols,1295.0,Folded,Arnis Vitols
 Arseniy Stolyarov,1471.0,Exact,Arseniy Stolyarov
 Artem Matantsev,1406.0,Exact,Artem Matantsev
 Artem Tseluiko,12055.0,Exact,Artem Tseluiko
 Artjoms Zaharovs,896.0,Exact,Artjoms Zaharovs
+Arturs Vercins,1983.0,Folded,Arturs Vercins
 Arturs Zasurcevs,12546.0,Fuzzy,Artūrs Zasurcevs
 Asnate Kocere,14423.0,Exact,Asnate Kocere
-Atis Silis,904.0,Fuzzy,Atis Sīlis
+Atis Silis,904.0,Folded,Atis Silis
 Audrius Pleikys,1274.0,Exact,Audrius Pleikys
 August Wegestål,2419.0,Exact,August Wegestål
-Axel Lundstrom,6505.0,Fuzzy,Axel Lundström
+Axel Lundstrom,6505.0,Folded,Axel Lundstrom
 Axel Lundström,6505.0,Exact,Axel Lundström
 Axel Lönnqvist,6509.0,Exact,Axel Lönnqvist
 Barna Stefan,1271.0,Exact,Barna Stefan
@@ -111,7 +115,7 @@ Bie Karlsson,13855.0,Exact,Bie Karlsson
 Bine Gajsek,12791.0,Exact,Bine Gajsek
 Bjarne Axelsen,1214.0,Exact,Bjarne Axelsen
 Björn Ingevaldsson,2898.0,Exact,Björn Ingevaldsson
-Björn Svedman,10155.0,Fuzzy,Bjorn Svedman
+Björn Svedman,10155.0,Folded,Björn Svedman
 Björn Söderström,5070.0,Exact,Björn Söderström
 Blasko Imrich,1233.0,Exact,Blasko Imrich
 Branislav Sabo,12724.0,Exact,Branislav Sabo
@@ -131,9 +135,9 @@ Daniel Biloglav,3977.0,Exact,Daniel Biloglav
 Daniel Daun,,Manual,Daniel Daun
 Daniel Gullberg,2449.0,Exact,Daniel Gullberg
 Daniel Matysek,1237.0,Exact,Daniel Matysek
-Daniel Matýsek,1237.0,Fuzzy,Daniel Matysek
+Daniel Matýsek,1237.0,Folded,Daniel Matýsek
 Daniel Nilsson Pålsson,2917.0,Exact,Daniel Nilsson Pålsson
-Daniel Nygard,7510.0,Fuzzy,Daniel Nygård
+Daniel Nygard,7510.0,Folded,Daniel Nygard
 Daniel Nygård,7510.0,Exact,Daniel Nygård
 Daniel Nyman,2217.0,Exact,Daniel Nyman
 Daniel Petersson,2591.0,Exact,Daniel Petersson
@@ -147,17 +151,17 @@ Daniil Mushnikov,9108.0,Exact,Daniil Mushnikov
 Danilo Baumanis,13410.0,Exact,Danilo Baumanis
 Darja Hrustaljova,10915.0,Exact,Darja Hrustaljova
 Darko Mrdalj,2277.0,Exact,Darko Mrdalj
-Darta Vesele,13324.0,Fuzzy,Dārta Vesele
+Darta Vesele,13324.0,Folded,Darta Vesele
 David Andersson,2108.0,Exact,David Andersson
 David Axelsson,8080.0,Exact,David Axelsson
 David Dvoracek,3991.0,Exact,David Dvoracek
-David Freséus,1221.0,Fuzzy,David Freseus
+David Freséus,1221.0,Folded,David Freséus
 David Hasler,1276.0,Exact,David Hasler
 David Nilsson,2666.0,Exact,David Nilsson
 David Nordström,2922.0,Exact,David Nordström
 David Smid,2584.0,Exact,David Smid
 David Šmíd,2584.0,Manual,David Šmíd
-Davis Apfelbaums,14709.0,Fuzzy,Dāvis Apfelbaums
+Davis Apfelbaums,14709.0,Folded,Davis Apfelbaums
 Denis Andrijashkin,4198.0,Fuzzy,Deniss Andrijashkin
 Denis Matveev,1475.0,Exact,Denis Matveev
 Deniss Andrijashkin,4198.0,Exact,Deniss Andrijashkin
@@ -172,6 +176,7 @@ Dmitry Malygin,388.0,Exact,Dmitry Malygin
 Dmitry Soloviev,216.0,Exact,Dmitry Soloviev
 Dmytro Donets,480.0,Exact,Dmytro Donets
 Dmytro Kudrytsky,1933.0,Exact,Dmytro Kudrytsky
+Domen Zupancic,13220.0,Folded,Domen Zupancic
 Domen Zupančič,13220.0,Exact,Domen Zupančič
 Dominik Prager,12721.0,Exact,Dominik Prager
 Eddie Nilsson,4329.0,Exact,Eddie Nilsson
@@ -181,9 +186,10 @@ Edgars Liepins,15529.0,Exact,Edgars Liepins
 Edgars Mucenieks,897.0,Exact,Edgars Mucenieks
 Edgars NAGLIS,9875.0,Exact,Edgars NAGLIS
 Edgars Naglis,9875.0,Exact,Edgars Naglis
-Edgars Saulitis,911.0,Fuzzy,Edgars Saulītis
-Edgars Vitols,2015.0,Fuzzy,Edgars Vītols
-Eduards Pakis,192.0,Fuzzy,Eduards Paķis
+Edgars Putnins,9323.0,Folded,Edgars Putnins
+Edgars Saulitis,911.0,Folded,Edgars Saulitis
+Edgars Vitols,2015.0,Folded,Edgars Vitols
+Eduards Pakis,192.0,Folded,Eduards Pakis
 Edward Refshus Hagerup,4206.0,Exact,Edward Refshus Hagerup
 Edzus Kaneps,14712.0,Manual,Edzus Kaneps
 Edžus KAŅEPS,14712.0,Exact,Edžus KAŅEPS
@@ -202,6 +208,7 @@ Emanuel Nilsson,2665.0,Exact,Emanuel Nilsson
 Emil Larsson,2185.0,Exact,Emil Larsson
 Emil Uimonen,8600.0,Exact,Emil Uimonen
 Emilia Blomberg,16442.0,Exact,Emilia Blomberg
+Emils Kass,15226.0,Folded,Emils Kass
 Emils Liepins,12541.0,Manual,Emils Liepins
 Emma Andersson,4186.0,Exact,Emma Andersson
 Emīls LIEPIŅŠ,12541.0,Exact,Emīls LIEPIŅŠ
@@ -214,7 +221,8 @@ Erik Johansson,3541.0,Exact,Erik Johansson
 Erik Jonsson,3533.0,Exact,Erik Jonsson
 Erik Lundström,,Manual,Erik Lundström
 Erik Werner,4066.0,Exact,Erik Werner
-Eriks Kuharjonoks,3640.0,Fuzzy,Ēriks Kuharjonoks
+Eriks Kuharjonoks,3640.0,Folded,Eriks Kuharjonoks
+Ernests Kalnins,11126.0,Folded,Ernests Kalnins
 Eskil Persson,3539.0,Exact,Eskil Persson
 Eskil Sandland,4308.0,Exact,Eskil Sandland
 Espen Eidsnes,4129.0,Exact,Espen Eidsnes
@@ -246,7 +254,7 @@ Fredrik Timeus,4287.0,Exact,Fredrik Timeus
 Frode Hagerup,1300.0,Exact,Frode Hagerup
 Gabor Alexovic,12722.0,Exact,Gabor Alexovic
 Gal Bohinc,10493.0,Exact,Gal Bohinc
-Geir Hjemas,1527.0,Fuzzy,Geir Hjemås
+Geir Hjemas,1527.0,Folded,Geir Hjemas
 Geir Hjemås,1527.0,Exact,Geir Hjemås
 Geir Tonny Brovold,2624.0,Exact,Geir Tonny Brovold
 Georgs Jansons,15542.0,Exact,Georgs Jansons
@@ -261,28 +269,28 @@ Glib Storozhenko,12086.0,Exact,Glib Storozhenko
 Goran Johansson,,Manual,Goran Johansson
 Grigori Timoschuk,9879.0,Exact,Grigori Timoschuk
 Grigoriy Dubinin,664.0,Exact,Grigoriy Dubinin
-Gundega Pake,193.0,Fuzzy,Gundega Paķe
+Gundega Pake,193.0,Folded,Gundega Pake
 Gunnar Gripp,5084.0,Exact,Gunnar Gripp
-Guntis Ernsteins,2989.0,Fuzzy,Guntis Ernšteins
+Guntis Ernsteins,2989.0,Folded,Guntis Ernsteins
 Gustaf Fagerberg,2620.0,Exact,Gustaf Fagerberg
 Gustaf Hermansson,12368.0,Exact,Gustaf Hermansson
 Gustaf Öqvist,2452.0,Exact,Gustaf Öqvist
-Gustav Bradland,2844.0,Fuzzy,Gustav Brådland
+Gustav Bradland,2844.0,Folded,Gustav Bradland
 Gustav Brådland,2844.0,Exact,Gustav Brådland
 Gustav Nilsson,13852.0,Exact,Gustav Nilsson
 Gustavs Keisters,9896.0,Exact,Gustavs Keisters
-Göran Agdur,1523.0,Fuzzy,Goran Agdur
+Göran Agdur,1523.0,Folded,Göran Agdur
 Göran Lönnqvist,13856.0,Exact,Göran Lönnqvist
 Göran Skog,8021.0,Exact,Göran Skog
 Hanna Ivantsova,4049.0,Exact,Hanna Ivantsova
 Hannes Lechner,9844.0,Exact,Hannes Lechner
 Hans Christian Lønne,1434.0,Exact,Hans Christian Lønne
-Hans E Lindqwist,2931.0,Fuzzy,Hans E. Lindqwist
+Hans E Lindqwist,2931.0,Folded,Hans E Lindqwist
 Hans E. Lindqwist,2931.0,Exact,Hans E. Lindqwist
 Hans Lindqwist,2931.0,Fuzzy,Hans E. Lindqwist
 Hans Nordin,2899.0,Exact,Hans Nordin
 Hans Norén,,Manual,Hans Norén
-Hans Österman,2042.0,Fuzzy,Hans Osterman
+Hans Österman,2042.0,Folded,Hans Österman
 Hans-Oyvind Sagen,2283.0,Fuzzy,Hans-Øyvind Sagen
 Hans-Øyvind Sagen,2283.0,Exact,Hans-Øyvind Sagen
 Haralds Janvars,8579.0,Exact,Haralds Janvars
@@ -300,7 +308,7 @@ Hermann Petuch,3066.0,Exact,Hermann Petuch
 Hjalmar Nilsson,2592.0,Exact,Hjalmar Nilsson
 Honza Sladek,2009.0,Manual,Honza Sladek
 Hudec Karol,4137.0,Exact,Hudec Karol
-Hugo Lönnqvist,9211.0,Fuzzy,Hugo Lonnqvist
+Hugo Lönnqvist,9211.0,Folded,Hugo Lönnqvist
 Hugo Pettersson,6578.0,Exact,Hugo Pettersson
 Hynek Nechutny,3913.0,Exact,Hynek Nechutny
 Ida Pedersen,5059.0,Exact,Ida Pedersen
@@ -312,38 +320,41 @@ Igor Zamiatin,4747.0,Exact,Igor Zamiatin
 Igor Zaporojets,470.0,Exact,Igor Zaporojets
 Ilgvars Pavlovskis,13604.0,Exact,Ilgvars Pavlovskis
 Ilya Golubev,4157.0,Exact,Ilya Golubev
-Ilze Kirse,12037.0,Fuzzy,Ilze Ķirse
-Imrich Blasko,15494.0,Fuzzy,Imrich Blaško
+Ilze Kirse,12037.0,Folded,Ilze Kirse
+Imrich Blasko,15494.0,Folded,Imrich Blasko
 Ingebret Risa,1248.0,Exact,Ingebret Risa
-Intars Garancs,3669.0,Fuzzy,Intars Garančs
+Intars Garancs,3669.0,Folded,Intars Garancs
 Ints Jurka,11282.0,Exact,Ints Jurka
 Ismo Aulaskari,13664.0,Exact,Ismo Aulaskari
 Ivan Schekotov,2460.0,Fuzzy,Ivan Shchekotov
 Ivan Zaharov,235.0,Exact,Ivan Zaharov
 Ivan Zakharov,235.0,Fuzzy,Ivan Zaharov
-Ivars Kirsis,12039.0,Fuzzy,Ivars Ķirsis
+Ivars Kirsis,12039.0,Folded,Ivars Kirsis
 Jaakko Koski,9825.0,Exact,Jaakko Koski
 Jaka Skrlep,10532.0,Exact,Jaka Skrlep
 Jakob Andersson,,Manual,Jakob Andersson
 Jakob Jonsson,6737.0,Exact,Jakob Jonsson
 Jakob Renvaktar,2259.0,Exact,Jakob Renvaktar
 Jakob Zalokar Obadic,10531.0,Exact,Jakob Zalokar Obadic
-Jakob Zalokar Obadič,10531.0,Fuzzy,Jakob Zalokar Obadic
+Jakob Zalokar Obadič,10531.0,Folded,Jakob Zalokar Obadič
 Jakub Matysek,4193.0,Exact,Jakub Matysek
 Jakub Sladek,889.0,Exact,Jakub Sladek
-Jakub Sládek,889.0,Fuzzy,Jakub Sladek
+Jakub Sládek,889.0,Folded,Jakub Sládek
 Jali Salo,5652.0,Exact,Jali Salo
 James-John Forsberg,13853.0,Exact,James-John Forsberg
 Jan Andersson,5567.0,Exact,Jan Andersson
 Jan Dryak,2583.0,Exact,Jan Dryak
+Jan Dryák,2583.0,Folded,Jan Dryák
 Jan Pelkonen,1550.0,Exact,Jan Pelkonen
 Jan Sladek,2009.0,Exact,Jan Sladek
-Jan Sládek,2009.0,Fuzzy,Jan Sladek
+Jan Sládek,2009.0,Folded,Jan Sládek
+Jan Tomastik,14553.0,Folded,Jan Tomastik
 Jani Herlevi,401.0,Exact,Jani Herlevi
-Janis Kalnevics,2988.0,Fuzzy,Jānis Kalnevics
-Janis Karlovskis,3642.0,Fuzzy,Jānis Karlovskis
-Janis Mikelis Bitmanis,10336.0,Fuzzy,Jānis Miķelis Bitmanis
+Janis Kalnevics,2988.0,Folded,Janis Kalnevics
+Janis Karlovskis,3642.0,Folded,Janis Karlovskis
+Janis Mikelis Bitmanis,10336.0,Folded,Janis Mikelis Bitmanis
 Janis Zalite,12530.0,Manual,Janis Zalite
+Janis Zemnickis,13600.0,Folded,Janis Zemnickis
 Janis zalite,12530.0,Manual,Janis zalite
 Janne Kantola,4179.0,Exact,Janne Kantola
 Janne Ollila,1208.0,Exact,Janne Ollila
@@ -352,7 +363,7 @@ Jarle Eide,2282.0,Exact,Jarle Eide
 Jekabs Rekis,10720.0,Manual,Jekabs Rekis
 Jerry Wikström,1322.0,Exact,Jerry Wikström
 Jevgeni Lvov,622.0,Exact,Jevgeni Lvov
-Jevgenijs Zaharovs,894.0,Fuzzy,Jevgēnijs Zaharovs
+Jevgenijs Zaharovs,894.0,Folded,Jevgenijs Zaharovs
 Jevgeny Tsupko,4146.0,Exact,Jevgeny Tsupko
 Jevgēnijs Zaharovs,894.0,Exact,Jevgēnijs Zaharovs
 Jimi Månsson,2930.0,Exact,Jimi Månsson
@@ -360,7 +371,7 @@ Jimmie Gellersten,2616.0,Fuzzy,Jimmy Gellersten
 Jimmy Douz,4485.0,Exact,Jimmy Douz
 Jimmy Eklund,2678.0,Exact,Jimmy Eklund
 Jimmy Gellersten,2616.0,Exact,Jimmy Gellersten
-Jimmy Mårdell,1211.0,Fuzzy,Jimmy Mardell
+Jimmy Mårdell,1211.0,Folded,Jimmy Mårdell
 Jiri Chylik,2010.0,Manual,Jiri Chylik
 Jiri Chylik ml.,2010.0,Exact,Jiri Chylik ml.
 Jiri Vacha,11912.0,Exact,Jiri Vacha
@@ -387,7 +398,7 @@ Jonas Mårdell,4065.0,Exact,Jonas Mårdell
 Jonas Nordin,2206.0,Exact,Jonas Nordin
 Jonas Pleikys,14567.0,Exact,Jonas Pleikys
 Jonas Willman,2211.0,Exact,Jonas Willman
-Jorens Leskovics,980.0,Fuzzy,Jorens Leskovičs
+Jorens Leskovics,980.0,Folded,Jorens Leskovics
 Jorn Moldvaer,1223.0,Manual,Jorn Moldvaer
 Jorn Moldvar,1223.0,Manual,Jorn Moldvar
 Jorn Skjeveland,4494.0,Manual,Jorn Skjeveland
@@ -398,7 +409,7 @@ Juho Itkonen,9856.0,Exact,Juho Itkonen
 Juho Rautio,1212.0,Exact,Juho Rautio
 Julia Forsberg,15724.0,Exact,Julia Forsberg
 Julian Elvén,2643.0,Exact,Julian Elvén
-Jurgis Tihomirovs,10856.0,Fuzzy,Jurģis Tihomirovs
+Jurgis Tihomirovs,10856.0,Folded,Jurgis Tihomirovs
 Jurgita Vasileviciene,2006.0,Exact,Jurgita Vasileviciene
 Juri Artamonov,4754.0,Exact,Juri Artamonov
 Jørn Moldvær,1223.0,Exact,Jørn Moldvær
@@ -406,9 +417,9 @@ Jēkabs REĶIS,10720.0,Exact,Jēkabs REĶIS
 Kai Armonies,1818.0,Exact,Kai Armonies
 Kalle Bindekrans,906.0,Manual,Kalle Bindekrans
 Karl Jönsson,2310.0,Exact,Karl Jönsson
-Karlis Balodis,912.0,Fuzzy,Kārlis Balodis
+Karlis Balodis,912.0,Folded,Karlis Balodis
 Karyna Pirumshoieva,11648.0,Fuzzy,Karina Pirumshoeva
-Kaspars Vilums,12517.0,Fuzzy,Kaspars Viļums
+Kaspars Vilums,12517.0,Folded,Kaspars Vilums
 Katrina Lihacova,9739.0,Manual,Katrina Lihacova
 Kenneth Nielsen,9240.0,Exact,Kenneth Nielsen
 Kenneth Nilsson,,Manual,Kenneth Nilsson
@@ -428,22 +439,23 @@ Klara Jonsson,3534.0,Exact,Klara Jonsson
 Klavdij Starman,10535.0,Exact,Klavdij Starman
 Krisjanis Zemnickis,13403.0,Manual,Krisjanis Zemnickis
 Krista Annija Lagzdina,15548.0,Manual,Krista Annija Lagzdina
-Krista Lagzdiņa,15548.0,Fuzzy,Krista Lagzdina
+Krista Lagzdiņa,15548.0,Folded,Krista Lagzdiņa
 Kristaps NAGLIS,9863.0,Exact,Kristaps NAGLIS
 Kristaps Naglis,9863.0,Exact,Kristaps Naglis
+Kristaps Riekstins,4652.0,Folded,Kristaps Riekstins
 Kristaps Riekstiņš,4652.0,Exact,Kristaps Riekstiņš
 Kristaps Zarinieks,979.0,Exact,Kristaps Zarinieks
 Kristian Bengtsson,2219.0,Exact,Kristian Bengtsson
-Kristian Iso-Tryykari,9217.0,Fuzzy,Kristian Iso-Tryykäri
+Kristian Iso-Tryykari,9217.0,Folded,Kristian Iso-Tryykari
 Kristian Iso-Tryykäri,9217.0,Exact,Kristian Iso-Tryykäri
 Kristin Fjermestad,4210.0,Exact,Kristin Fjermestad
 Kristoffer Koren Sørvang,13447.0,Manual,Kristoffer Koren Sørvang
 Krystof Herold,2022.0,Exact,Krystof Herold
 Krystof Lebl,1224.0,Exact,Krystof Lebl
-Kryštof Herold,2022.0,Fuzzy,Krystof Herold
-Kryštof Lebl,1224.0,Fuzzy,Krystof Lebl
+Kryštof Herold,2022.0,Folded,Kryštof Herold
+Kryštof Lebl,1224.0,Folded,Kryštof Lebl
 Ladislav Tmej,887.0,Exact,Ladislav Tmej
-Ladislav Tměj,887.0,Fuzzy,Ladislav Tmej
+Ladislav Tměj,887.0,Folded,Ladislav Tměj
 Laima Kamzola,5635.0,Exact,Laima Kamzola
 Lari Metsala,8521.0,Exact,Lari Metsala
 Lari Metsälä,8521.0,Manual,Lari Metsälä
@@ -458,11 +470,12 @@ Lars-Erik Svensson,1297.0,Exact,Lars-Erik Svensson
 Lasse Lindgren,7618.0,Exact,Lasse Lindgren
 Laszlo Altmann,5321.0,Exact,Laszlo Altmann
 Laszlo Kiss,5322.0,Exact,Laszlo Kiss
+Lauri Tornstrom,2582.0,Folded,Lauri Tornstrom
 Lauri Törnström,2582.0,Exact,Lauri Törnström
 Laurynas Orlauskas,2018.0,Exact,Laurynas Orlauskas
 Lenart Traven,10546.0,Exact,Lenart Traven
 Leon Haussknecht,1267.0,Exact,Leon Haussknecht
-Leonards Mazurs,9159.0,Fuzzy,Leonards Mazūrs
+Leonards Mazurs,9159.0,Folded,Leonards Mazurs
 Leonards Mazūrs,9159.0,Exact,Leonards Mazūrs
 Leos Hvizd ml.,4835.0,Manual,Leos Hvizd ml.
 Linas Vasilevicius,1285.0,Exact,Linas Vasilevicius
@@ -470,12 +483,13 @@ Linus Nilsson,2020.0,Exact,Linus Nilsson
 Linus Persson,,Manual,Linus Persson
 Linus Restel,1305.0,Exact,Linus Restel
 Liubomyr Kondrashevskyi,15713.0,Exact,Liubomyr Kondrashevskyi
-Liv Österman,2681.0,Fuzzy,Liv Osterman
+Liv Österman,2681.0,Folded,Liv Österman
 Lotta Holmberg,5055.0,Exact,Lotta Holmberg
 Lukas Andersson,6521.0,Exact,Lukas Andersson
 Lukas Gustafsson,2655.0,Exact,Lukas Gustafsson
 Lukas Kahoun,2966.0,Exact,Lukas Kahoun
-Lukass Jurka,9944.0,Fuzzy,Lūkass Jurka
+Lukass Jurka,9944.0,Folded,Lukass Jurka
+László Altmann,5321.0,Folded,László Altmann
 Magnus Borg,2222.0,Exact,Magnus Borg
 Magnus Falk,5572.0,Exact,Magnus Falk
 Magnus Klippen,1647.0,Exact,Magnus Klippen
@@ -493,11 +507,11 @@ Marcus Koppe,4800.0,Exact,Marcus Koppe
 Marcus Lagerkvist,5060.0,Exact,Marcus Lagerkvist
 Marcus Persson,2210.0,Exact,Marcus Persson
 Marcus Stenbom,12840.0,Fuzzy,Markus Stenbom
-Margarita Abele,8424.0,Fuzzy,Margarita Ābele
+Margarita Abele,8424.0,Folded,Margarita Abele
 Maria Elena Pettersson,2007.0,Exact,Maria Elena Pettersson
 Maria Saveljeva,208.0,Exact,Maria Saveljeva
-Marius Smaberg,2627.0,Fuzzy,Marius Småberg
-Mariuss Toms Kalnins,15224.0,Fuzzy,Mariuss Toms Kalniņš
+Marius Smaberg,2627.0,Folded,Marius Smaberg
+Mariuss Toms Kalnins,15224.0,Folded,Mariuss Toms Kalnins
 Mariya Miloradova,228.0,Fuzzy,Maria Miloradova
 Mark Alexovic,12723.0,Exact,Mark Alexovic
 Mark Kritski,4196.0,Exact,Mark Kritski
@@ -507,13 +521,16 @@ Marks Kristians Krauze,11127.0,Exact,Marks Kristians Krauze
 Markus Bengtsson,4071.0,Exact,Markus Bengtsson
 Markus Nilsson,2033.0,Exact,Markus Nilsson
 Martin Arenlind,1231.0,Exact,Martin Arenlind
-Martin Lundén,2075.0,Fuzzy,Martin Lunden
+Martin Lundén,2075.0,Folded,Martin Lundén
 Martin Madera,1238.0,Exact,Martin Madera
-Martin Maděra,1238.0,Fuzzy,Martin Madera
+Martin Maděra,1238.0,Folded,Martin Maděra
 Martin Martinec,9668.0,Exact,Martin Martinec
+Martin Vojacek,14562.0,Folded,Martin Vojacek
 Martin Zenisek,1241.0,Exact,Martin Zenisek
+Martin Ženíšek,1241.0,Folded,Martin Ženíšek
 Mathias Blomquist,4133.0,Exact,Mathias Blomquist
-Matiss Jakseboga,9160.0,Fuzzy,Matīss Jakseboga
+Matiss Jakseboga,9160.0,Folded,Matiss Jakseboga
+Matiss Saulitis,617.0,Folded,Matiss Saulitis
 Mats Blomqvist,4133.0,Manual,Mats Blomqvist
 Mats Johansson,2410.0,Exact,Mats Johansson
 Mats Persson,,Manual,Mats Persson
@@ -532,11 +549,11 @@ Maxim Borisov,142.0,Exact,Maxim Borisov
 Maxim Starkov,1478.0,Exact,Maxim Starkov
 Mazvydas Satkus,2031.0,Exact,Mazvydas Satkus
 Micael Borgh,3211.0,Exact,Micael Borgh
-Micael Myrén,5017.0,Fuzzy,Micael Myren
+Micael Myrén,5017.0,Folded,Micael Myrén
 Micael Sundqvist,7164.0,Exact,Micael Sundqvist
 Michael Toft Nielsen,5487.0,Exact,Michael Toft Nielsen
 Michal Hvizd,888.0,Exact,Michal Hvizd
-Michal Hvižd,888.0,Fuzzy,Michal Hvizd
+Michal Hvižd,888.0,Folded,Michal Hvižd
 Michal Kobrle,2631.0,Exact,Michal Kobrle
 Michal Masek,5323.0,Exact,Michal Masek
 Michal Tous,15416.0,Exact,Michal Tous
@@ -557,12 +574,13 @@ Mikhail Spivakovsky,,Manual,Mikhail Spivakovsky
 Mikko Haveri,2035.0,Exact,Mikko Haveri
 Mikko Haverinen,,Manual,Mikko Haverinen
 Mikko Kaariainen,425.0,Exact,Mikko Kaariainen
+Mikus SAULĪTIS,616.0,Folded,Mikus SAULĪTIS
 Mikus Saulitis,616.0,Exact,Mikus Saulitis
-Mikus Saulītis,616.0,Fuzzy,Mikus Saulitis
+Mikus Saulītis,616.0,Folded,Mikus Saulītis
 Milos Sevr,885.0,Exact,Milos Sevr
 Miloš Ševr,885.0,Manual,Miloš Ševr
 Miroslav Cernoch,1235.0,Exact,Miroslav Cernoch
-Miroslav Ramsak,15262.0,Fuzzy,Miroslav Ramšak
+Miroslav Ramsak,15262.0,Folded,Miroslav Ramsak
 Mitro Daniel,1239.0,Exact,Mitro Daniel
 Mitro Milan,1273.0,Exact,Mitro Milan
 Mojca Skrlep,11976.0,Exact,Mojca Skrlep
@@ -574,7 +592,7 @@ Mykhaylo Shalomayev,467.0,Exact,Mykhaylo Shalomayev
 Mykhaylo Spivakovskyy,434.0,Exact,Mykhaylo Spivakovskyy
 Mykola Verbytskyy,11390.0,Exact,Mykola Verbytskyy
 Mārcis Radelis,13665.0,Exact,Mārcis Radelis
-Nejc Skrlep,1251.0,Fuzzy,Nejc Škrlep
+Nejc Skrlep,1251.0,Folded,Nejc Skrlep
 Nejc Škrlep,1251.0,Exact,Nejc Škrlep
 Netta Jousi,908.0,Exact,Netta Jousi
 Nicklas Nilsson,4636.0,Exact,Nicklas Nilsson
@@ -582,10 +600,10 @@ Nico Jenni,9016.0,Exact,Nico Jenni
 Nikita Zholobov,1673.0,Exact,Nikita Zholobov
 Niklas Blomberg,3972.0,Exact,Niklas Blomberg
 Niklas Bärve,2940.0,Exact,Niklas Bärve
-Niklavs Peteris Sviklis,10969.0,Fuzzy,Niklāvs Pēteris Sviklis
+Niklavs Peteris Sviklis,10969.0,Folded,Niklavs Peteris Sviklis
 Niko Tuominen,4992.0,Exact,Niko Tuominen
 Nikolay Krokhmal,1440.0,Manual,Nikolay Krokhmal
-Niks Lacis,5129.0,Fuzzy,Niks Lācis
+Niks Lacis,5129.0,Folded,Niks Lacis
 Nils Jönsson,2927.0,Exact,Nils Jönsson
 Oleg Bondarenko,1411.0,Exact,Oleg Bondarenko
 Oleg Dmitrichenko,145.0,Exact,Oleg Dmitrichenko
@@ -626,7 +644,7 @@ Pavel Pylypenko,189.0,Fuzzy,Pavlo Pylypenko
 Peder Andersson,,Manual,Peder Andersson
 Per Back,2412.0,Exact,Per Back
 Per E. Weckhorst,1423.0,Exact,Per E. Weckhorst
-Per-Erik Wilsbeck,13443.0,Fuzzy,Per Erik Wilsbeck
+Per-Erik Wilsbeck,13443.0,Folded,Per-Erik Wilsbeck
 Peter Andersson,5196.0,Exact,Peter Andersson
 Peter Björkman,8264.0,Exact,Peter Björkman
 Peter Enderborg,4286.0,Exact,Peter Enderborg
@@ -635,6 +653,7 @@ Peter Mozhaev,205.0,Fuzzy,Petr Mozhaev
 Peter Östlund,2920.0,Exact,Peter Östlund
 Petr Mozhaev,205.0,Exact,Petr Mozhaev
 Petr Tmej,886.0,Exact,Petr Tmej
+Petr Tměj,886.0,Folded,Petr Tměj
 Petrek Jaroslav,1259.0,Exact,Petrek Jaroslav
 Petrus Miettinen,8546.0,Exact,Petrus Miettinen
 Petter Bengtsson,2203.0,Exact,Petter Bengtsson
@@ -645,20 +664,24 @@ Pontus Back,2420.0,Exact,Pontus Back
 Pontus Chorell,4134.0,Exact,Pontus Chorell
 Pontus Eriksson,2201.0,Exact,Pontus Eriksson
 Pär Pettersson,,Manual,Pär Pettersson
-Pål Bakken,1557.0,Fuzzy,Pal Bakken
+Pål Bakken,1557.0,Folded,Pål Bakken
 Péter Borsányi,3065.0,Exact,Péter Borsányi
-Railends Kuhalskis,8773.0,Fuzzy,Railends Kuhaļskis
-Raimonds Stalmanis,14429.0,Fuzzy,Raimonds Stālmanis
+Railends Kuhalskis,8773.0,Folded,Railends Kuhalskis
+Raimonds Stalmanis,14429.0,Folded,Raimonds Stalmanis
 Rainers KALNIŅŠ,9763.0,Exact,Rainers KALNIŅŠ
+Rainers Kalnins,9763.0,Folded,Rainers Kalnins
 Rainers Kalniņš,9763.0,Exact,Rainers Kalniņš
+Rainers Martuzans,13325.0,Folded,Rainers Martuzans
 Raivis Pukinskis,893.0,Exact,Raivis Pukinskis
-Raivis Sternats,202.0,Fuzzy,Raivis Sternāts
+Raivis Sternats,202.0,Folded,Raivis Sternats
 Ralph Pommerenke,1622.0,Exact,Ralph Pommerenke
 Regnars Vazolins,9364.0,Manual,Regnars Vazolins
 Regnārs VAZOLIŅŠ,9364.0,Exact,Regnārs VAZOLIŅŠ
 Reinis Stacevics,,Manual,Reinis Stacevics
-Renars Masulis,15556.0,Fuzzy,Renārs Masulis
+Renars Masulis,15556.0,Folded,Renars Masulis
+Renars Saulitis,10750.0,Folded,Renars Saulitis
 Rene Huhtala,1552.0,Exact,Rene Huhtala
+Ricards Kalnins,12467.0,Folded,Ricards Kalnins
 Richard Pedersen,2695.0,Exact,Richard Pedersen
 Richard Petersson,3538.0,Exact,Richard Petersson
 Rickard Callertun,2579.0,Exact,Rickard Callertun
@@ -668,12 +691,14 @@ Rikard Nässelkvist,4532.0,Exact,Rikard Nässelkvist
 Ritvars Felkers,9527.0,Exact,Ritvars Felkers
 Robban Gawell,3529.0,Exact,Robban Gawell
 Robert Forsberg,13991.0,Exact,Robert Forsberg
+Roberts Aserins,13405.0,Folded,Roberts Aserins
 Roberts Kerns,9712.0,Exact,Roberts Kerns
 Robin Larsson,3915.0,Exact,Robin Larsson
 Robin Westergren,3535.0,Exact,Robin Westergren
 Roger Olovsson,2220.0,Exact,Roger Olovsson
 Rok Skrlep,1311.0,Exact,Rok Skrlep
 Rolands RIEKSTIŅŠ,4653.0,Exact,Rolands RIEKSTIŅŠ
+Rolands Riekstins,4653.0,Folded,Rolands Riekstins
 Rolands Riekstiņš,4653.0,Exact,Rolands Riekstiņš
 Rolf Locher,1264.0,Exact,Rolf Locher
 Roman Ignatenko,1452.0,Exact,Roman Ignatenko
@@ -682,18 +707,19 @@ Ronald Kocsis,12720.0,Exact,Ronald Kocsis
 Roni Nuttunen,623.0,Exact,Roni Nuttunen
 Rosanna Johansson,4496.0,Exact,Rosanna Johansson
 Roy Persen,3831.0,Exact,Roy Persen
-Rudolfs Kamzols,14704.0,Fuzzy,Rūdolfs Kamzols
-Rudolfs Valainis,3353.0,Fuzzy,Rūdolfs Valainis
+Rudolfs Kamzols,14704.0,Folded,Rudolfs Kamzols
+Rudolfs Valainis,3353.0,Folded,Rudolfs Valainis
 Rune Pettersson,4941.0,Exact,Rune Pettersson
 Ruslan Kobchuk,8732.0,Exact,Ruslan Kobchuk
 Salvis Skarainis,194.0,Exact,Salvis Skarainis
 Sami Hellstrom,2025.0,Exact,Sami Hellstrom
-Sami Hellström,2025.0,Fuzzy,Sami Hellstrom
+Sami Hellström,2025.0,Folded,Sami Hellström
 Sandis KALNIŅŠ,3637.0,Exact,Sandis KALNIŅŠ
+Sandis Kalnins,3637.0,Folded,Sandis Kalnins
 Sandis Kalniņš,3637.0,Exact,Sandis Kalniņš
 Sandis Krasts,9858.0,Exact,Sandis Krasts
 Sandis Kristaps LAGZDIŅŠ,5276.0,Exact,Sandis Kristaps LAGZDIŅŠ
-Sandis Kristaps Lagzdins,5276.0,Fuzzy,Sandis Kristaps Lagzdiņš
+Sandis Kristaps Lagzdins,5276.0,Folded,Sandis Kristaps Lagzdins
 Sandis Kristaps Lagzdiņš,5276.0,Exact,Sandis Kristaps Lagzdiņš
 Sandra Komaraite,1287.0,Exact,Sandra Komaraite
 Santtu Sainio,419.0,Exact,Santtu Sainio
@@ -707,8 +733,8 @@ Simon Thomas,5156.0,Exact,Simon Thomas
 Simonas Pleikys,2017.0,Exact,Simonas Pleikys
 Sinus Moberg,12867.0,Exact,Sinus Moberg
 Sissela Blume,5720.0,Exact,Sissela Blume
-Sissie Wikström,1316.0,Fuzzy,Sissie Wikstrom
-"Sissie Wikström,",1316.0,Fuzzy,Sissie Wikstrom
+Sissie Wikström,1316.0,Folded,Sissie Wikström
+"Sissie Wikström,",1316.0,Folded,"Sissie Wikström,"
 Sondre Efteland Johansen,1531.0,Exact,Sondre Efteland Johansen
 Staffan Olsson,2212.0,Exact,Staffan Olsson
 Stanislav Lutay,1392.0,Exact,Stanislav Lutay
@@ -721,15 +747,15 @@ Stepan Korotkiy,236.0,Exact,Stepan Korotkiy
 Stian Lode,1245.0,Exact,Stian Lode
 Stian Ostrem,1213.0,Exact,Stian Ostrem
 Suojanen Antti,1301.0,Exact,Suojanen Antti
-Susanna Pössl,4093.0,Fuzzy,Susanna Possl
+Susanna Pössl,4093.0,Folded,Susanna Pössl
 Svein Arne Fure,1432.0,Exact,Svein Arne Fure
 Svein Inge Omholt,5197.0,Exact,Svein Inge Omholt
 Sveke Jonsson,2221.0,Exact,Sveke Jonsson
 Sven Pettersson,4927.0,Exact,Sven Pettersson
 Teemu Koskela,8363.0,Exact,Teemu Koskela
-Teodor Wegestål,2411.0,Fuzzy,Teodor Wegestal
+Teodor Wegestål,2411.0,Folded,Teodor Wegestål
 Teuvo Moisa,649.0,Exact,Teuvo Moisa
-Thomas Björnson,3412.0,Fuzzy,Thomas Bjornson
+Thomas Björnson,3412.0,Folded,Thomas Björnson
 Thomas Elfström,16443.0,Exact,Thomas Elfström
 Thomas Haussknecht,1254.0,Exact,Thomas Haussknecht
 Thomas Malmberg,2371.0,Exact,Thomas Malmberg
@@ -746,11 +772,11 @@ Timur Rimski,9009.0,Exact,Timur Rimski
 Tomas Aberg,2897.0,Exact,Tomas Aberg
 Tomas Bucek,12834.0,Exact,Tomas Bucek
 Tomas Fägerlind,2938.0,Exact,Tomas Fägerlind
-Tomas Kahoun ml,2012.0,Fuzzy,Tomas Kahoun ml.
+Tomas Kahoun ml,2012.0,Folded,Tomas Kahoun ml
 Tomas Kahoun ml.,2012.0,Exact,Tomas Kahoun ml.
 Tomas Rybing,4638.0,Exact,Tomas Rybing
 Tomas Ulis,4181.0,Exact,Tomas Ulis
-Tomas Åberg,2897.0,Fuzzy,Tomas Aberg
+Tomas Åberg,2897.0,Folded,Tomas Åberg
 Tomi Uimonen,10112.0,Exact,Tomi Uimonen
 Tommy Nielsen,6580.0,Exact,Tommy Nielsen
 Toms Jakseboga,14726.0,Exact,Toms Jakseboga
@@ -763,16 +789,16 @@ Tore Sorheim,3874.0,Fuzzy,Tore Sørheim
 Tron Omland,3873.0,Exact,Tron Omland
 Trond Ove Gangsoy,1247.0,Fuzzy,Trond Ove Gangsøy
 Trond Ove Gangsøy,1247.0,Exact,Trond Ove Gangsøy
-Truls Månsson,3949.0,Fuzzy,Truls Mansson
+Truls Månsson,3949.0,Folded,Truls Månsson
 Trygve Lie,3827.0,Exact,Trygve Lie
 Ulrich Hennemann,1623.0,Exact,Ulrich Hennemann
 Ulrik Nilsson,2366.0,Exact,Ulrik Nilsson
-Uno Österman,2070.0,Fuzzy,Uno Osterman
+Uno Österman,2070.0,Folded,Uno Österman
 Urban Edmundsson,7595.0,Exact,Urban Edmundsson
 Urban Kohlsgården,5138.0,Exact,Urban Kohlsgården
 Urban Mezek,10496.0,Exact,Urban Mezek
-Uroš Matanovic,1236.0,Fuzzy,Uros Matanovic
-Uve Vikmanis,13408.0,Fuzzy,Ūve Vikmanis
+Uroš Matanovic,1236.0,Folded,Uroš Matanovic
+Uve Vikmanis,13408.0,Folded,Uve Vikmanis
 Vaclav Pikl,1218.0,Exact,Vaclav Pikl
 Vafa Hamdamov,690.0,Exact,Vafa Hamdamov
 Valentin Dietze,1621.0,Exact,Valentin Dietze
@@ -798,13 +824,13 @@ Vladimir Areshkin,2359.0,Exact,Vladimir Areshkin
 Vladimir Egorov,353.0,Exact,Vladimir Egorov
 Vladimir Gatara,6517.0,Exact,Vladimir Gatara
 Vladimir Kraus,16428.0,Exact,Vladimir Kraus
-Vladimír Kraus,16428.0,Fuzzy,Vladimir Kraus
+Vladimír Kraus,16428.0,Folded,Vladimír Kraus
 Vladislav Semenchuk,6385.0,Exact,Vladislav Semenchuk
 Vladislav Zubel,693.0,Exact,Vladislav Zubel
 Volodymyr Kvasnikov,10701.0,Exact,Volodymyr Kvasnikov
 Václav Pikl,14668.0,Exact,Václav Pikl
 Waqas Nawaz Khan,2463.0,Fuzzy,Waqas Nawas Khan
-Wilhelm Pössl,4489.0,Fuzzy,Wilhelm Possl
+Wilhelm Pössl,4489.0,Folded,Wilhelm Pössl
 Wilton Wallin,13858.0,Exact,Wilton Wallin
 Yanis Galuzo,176.0,Exact,Yanis Galuzo
 Yevgen Levdansky,511.0,Fuzzy,Yevhen Levdansky
@@ -815,11 +841,11 @@ Yurii Shapovalenko,3350.0,Exact,Yurii Shapovalenko
 Yuriy Bondarenko,1777.0,Exact,Yuriy Bondarenko
 Yuriy Prostakov,1376.0,Exact,Yuriy Prostakov
 Zala Skrlep,10491.0,Exact,Zala Skrlep
-Zala Škrlep,10491.0,Fuzzy,Zala Skrlep
+Zala Škrlep,10491.0,Folded,Zala Škrlep
 Zdenek Lopaur,2044.0,Exact,Zdenek Lopaur
-Zdenek Matousek ml.,2585.0,Fuzzy,Zdenek Matoušek ml.
-Zdeněk Lopaur,2044.0,Fuzzy,Zdenek Lopaur
-Zygimantas Remeika,11974.0,Fuzzy,Žygimantas Remeika
+Zdenek Matousek ml.,2585.0,Folded,Zdenek Matousek ml.
+Zdeněk Lopaur,2044.0,Folded,Zdeněk Lopaur
+Zygimantas Remeika,11974.0,Folded,Zygimantas Remeika
 Øystein Klippen,2843.0,Exact,Øystein Klippen
 Øyvind Hansen,1413.0,Exact,Øyvind Hansen
 Øyvind Rønne,3347.0,Exact,Øyvind Rønne
