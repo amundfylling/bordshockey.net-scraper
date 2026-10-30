@@ -41,7 +41,18 @@ jobs:
         run: python map_players.py
 
       - name: Commit and push changes
-        uses: stefanzweifel/git-auto-commit-action@v4
-        with:
-          commit_message: "chore: daily data update"
-          file_pattern: "bordshockey_results.csv player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json"
+        # main can move while the fetch runs, so rebase onto it before pushing.
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add bordshockey_results.csv player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json
+          if git diff --cached --quiet; then
+            echo "No data changes."
+            exit 0
+          fi
+          git commit -m "chore: daily data update"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1
