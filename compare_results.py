@@ -1,8 +1,8 @@
 """
-Compare two results CSVs (e.g. the HTML scraper's and resultat_api_scraper.py's)
+Compare two results files (.csv or .parquet) (e.g. the HTML scraper's and resultat_api_scraper.py's)
 and print where they differ.
 
-    python3 compare_results.py bordshockey_results.csv /tmp/api_results.csv
+    python3 compare_results.py bordshockey_results.csv data/bordshockey_results.parquet
 """
 
 from __future__ import annotations
@@ -11,13 +11,15 @@ import sys
 
 import pandas as pd
 
+from results_store import read_results
+
 MATCH_KEY = ["SourceTournamentID", "StageURL", "RoundNumber", "PlayoffGameNumber", "Player1", "Player2"]
 VALUE_COLUMNS = ["Stage", "GoalsPlayer1", "GoalsPlayer2", "Overtime", "StageID", "StageSequence", "StageType",
                  "Date", "TournamentName", "TournamentID", "SourceStageID", "SourceMatchID"]
 
 
 def _load(path: str) -> pd.DataFrame:
-    df = pd.read_csv(path, encoding="utf-8-sig", dtype=str, keep_default_na=False)
+    df = read_results(path, as_text=True)
     for col in ("PlayoffGameNumber", "SourceMatchID", "SourceStageID", "RoundNumber"):
         df[col] = df[col].str.replace(r"\.0$", "", regex=True)
     return df
