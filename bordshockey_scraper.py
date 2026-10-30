@@ -18,6 +18,8 @@ import requests
 from bs4 import BeautifulSoup, Tag
 from tqdm import tqdm
 
+from results_store import RESULTS_PATH, read_results, results_exist, write_results
+
 # constants
 
 _tqdm = tqdm
@@ -915,11 +917,11 @@ def _existing_result_urls(df: pd.DataFrame) -> set[str]:
 
 
 def _load_existing_csv(csv_file: str) -> pd.DataFrame:
-    if not os.path.exists(csv_file):
+    if not results_exist(csv_file):
         return pd.DataFrame(columns=OUTPUT_COLUMNS)
     try:
-        df = pd.read_csv(csv_file)
-        print(f"Loaded {len(df)} rows from existing CSV.")
+        df = read_results(csv_file)
+        print(f"Loaded {len(df)} existing rows.")
         return df
     except Exception as exc:
         print(f"Warning: Could not read existing CSV: {exc}", file=sys.stderr)
@@ -928,7 +930,7 @@ def _load_existing_csv(csv_file: str) -> pd.DataFrame:
 
 def _write_results(csv_file: str, df: pd.DataFrame) -> None:
     final_df = _ensure_output_schema(df)
-    final_df.to_csv(csv_file, index=False, encoding="utf-8-sig")
+    write_results(csv_file, final_df)
     print(f"Wrote {csv_file}. Total rows: {len(final_df)}")
 
 
@@ -936,7 +938,7 @@ def _write_results(csv_file: str, df: pd.DataFrame) -> None:
 
 def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Scrape bordshockey.net tournament match results.")
-    parser.add_argument("--csv", default="bordshockey_results.csv", help="Output CSV path.")
+    parser.add_argument("--csv", default=RESULTS_PATH, help="Output path: .parquet (default) or .csv.")
     parser.add_argument("--max-workers", type=int, default=12, help="Parallel workers for archive scrape.")
     parser.add_argument("--rebuild", action="store_true", help="Ignore existing CSV and rebuild the full archive.")
     parser.add_argument(

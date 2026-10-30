@@ -1,6 +1,6 @@
 """
 Fetch the ITHF and SBHF ids of every participant in the tournaments of
-bordshockey_results.csv from the resultat.bordshockey.se JSON API
+the results dataset (data/bordshockey_results.parquet) from the resultat.bordshockey.se JSON API
 (GET /api/tournaments/{id}/export, docs: https://resultat.bordshockey.se/api-docs.html)
 and cache them in api_player_ids.csv, one row per tournament and player name.
 
@@ -18,10 +18,11 @@ from concurrent.futures import ThreadPoolExecutor
 import pandas as pd
 import requests
 
+from results_store import RESULTS_PATH, read_results
+
 API_BASE = "https://resultat.bordshockey.se/api"
 HEADERS = {"User-Agent": "bordshockey.net-scraper (+https://github.com/amundfylling/bordshockey.net-scraper)"}
 
-RESULTS_CSV = "bordshockey_results.csv"
 API_IDS_CSV = "api_player_ids.csv"
 API_IDS_COLUMNS = ["SourceTournamentID", "PlayerName", "ITHF", "SBHF", "Nation", "Club"]
 
@@ -90,13 +91,13 @@ def fetch_missing(source_tournament_ids: set[str], max_workers: int = 8) -> pd.D
 
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Cache API participant ids for the tournaments in the results CSV.")
-    parser.add_argument("--csv", default=RESULTS_CSV, help="Results CSV whose tournaments to look up.")
+    parser.add_argument("--csv", default=RESULTS_PATH, help="Results file whose tournaments to look up.")
     parser.add_argument("--out", default=API_IDS_CSV, help="Participant id cache.")
     parser.add_argument("--refresh", action="store_true", help="Fetch every tournament again.")
     args = parser.parse_args(argv)
 
-    results = pd.read_csv(args.csv, encoding="utf-8-sig", usecols=["SourceTournamentID"], dtype=str)
-    wanted = set(results["SourceTournamentID"].dropna())
+    results = read_results(args.csv, columns=["SourceTournamentID"], as_text=True)
+    wanted = set(results["SourceTournamentID"]) - {""}
 
     cached = pd.DataFrame(columns=API_IDS_COLUMNS)
     if os.path.exists(args.out) and not args.refresh:

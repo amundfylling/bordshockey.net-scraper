@@ -1,5 +1,5 @@
 """
-Assign Scorpion PlayerIDs to the players in bordshockey_results.csv.
+Assign Scorpion PlayerIDs to the players in data/bordshockey_results.parquet.
 
 Each player entry (one player name in one tournament) is matched in this order:
 
@@ -11,7 +11,7 @@ Each player entry (one player name in one tournament) is matched in this order:
 4. Optionally, for players Scorpion does not have: ITHF_ONLY_ID_OFFSET + ITHF id.
 
 Writes player_entry_map.csv (per entry), player_id_map.csv (per name),
-unmapped_players.csv, and Player1ID/Player2ID in bordshockey_results.csv.
+unmapped_players.csv, and Player1ID/Player2ID in data/bordshockey_results.parquet.
 """
 
 import argparse
@@ -25,8 +25,10 @@ import unicodedata
 import numpy as np
 import pandas as pd
 
+from results_store import RESULTS_PATH, read_results, results_exist, write_results
+
 # --- Configuration ---
-RESULTS_CSV = "bordshockey_results.csv"
+RESULTS_CSV = RESULTS_PATH
 GITHUB_CSV = "players_data.csv"
 API_IDS_CSV = "api_player_ids.csv"
 MANUAL_MAPPING_FILE = "manual_mapping.json"
@@ -272,14 +274,14 @@ def main(argv=None):
     args = parser.parse_args(argv)
 
     # 1. Validation
-    for path in (args.results, args.players):
-        if not os.path.exists(path):
+    for path, exists in ((args.results, results_exist(args.results)), (args.players, os.path.exists(args.players))):
+        if not exists:
             print(f"Error: {path} not found.", file=sys.stderr)
             return 1
 
     print("Loading data...")
     # Read everything as text so the rewrite only touches the id columns.
-    results_df = pd.read_csv(args.results, encoding="utf-8-sig", dtype=str, keep_default_na=False)
+    results_df = read_results(args.results, as_text=True)
     github_df = pd.read_csv(args.players, encoding="utf-8-sig")
     api_df = (
         pd.read_csv(args.api_ids, encoding="utf-8-sig", dtype=str)
@@ -318,7 +320,7 @@ def main(argv=None):
             f.write(f"{name}\n")
 
     if not args.no_write_results:
-        apply_entry_map(results_df, entry_map).to_csv(args.results, index=False, encoding="utf-8-sig")
+        write_results(args.results, apply_entry_map(results_df, entry_map))
 
     # 5. Summary
     total = len(entry_map)

@@ -20,6 +20,8 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
+from results_store import RESULTS_PATH, read_results
+
 from bordshockey_scraper import (
     OUTPUT_COLUMNS,
     SOURCE,
@@ -280,7 +282,7 @@ def discover_tournaments(session: requests.Session, seasons: Iterable[str] | Non
 
 def main(argv: Iterable[str] | None = None) -> int:
     parser = argparse.ArgumentParser(description="Fetch tournament results from the resultat.bordshockey.se API.")
-    parser.add_argument("--csv", default="bordshockey_results.csv", help="Output CSV path.")
+    parser.add_argument("--csv", default=RESULTS_PATH, help="Output path: .parquet (default) or .csv.")
     parser.add_argument("--max-workers", type=int, default=4, help="Parallel tournament fetches.")
     parser.add_argument("--rebuild", action="store_true", help="Ignore existing CSV and fetch everything.")
     parser.add_argument("--season", action="append", help="Season short name such as 2526. Can be repeated.")
@@ -291,13 +293,13 @@ def main(argv: Iterable[str] | None = None) -> int:
     )
     parser.add_argument(
         "--only-from",
-        help="Only tournaments whose SourceTournamentID appears in this CSV (for comparing with the HTML scraper).",
+        help="Only tournaments whose SourceTournamentID appears in this results file (for comparing with the HTML scraper).",
     )
     args = parser.parse_args(list(argv) if argv is not None else None)
 
     only: set[str] = set(args.only or [])
     if args.only_from:
-        only |= set(pd.read_csv(args.only_from, usecols=["SourceTournamentID"])["SourceTournamentID"].astype(str))
+        only |= set(read_results(args.only_from, columns=["SourceTournamentID"], as_text=True)["SourceTournamentID"])
     seasons = args.season or (sorted({o.split("/", 1)[0] for o in only}) if only else None)
 
     player_map = _load_player_map()
