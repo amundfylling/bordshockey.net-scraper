@@ -5,9 +5,14 @@ from unittest import mock
 
 import pandas as pd
 
-from bordshockey_scraper import _generate_id
 import resultat_api_scraper
-from resultat_api_scraper import ApiTournament, rows_from_group_stage, rows_from_playoff_stage
+from resultat_api_scraper import (
+    ApiTournament,
+    _deduplicate_results,
+    _generate_id,
+    rows_from_group_stage,
+    rows_from_playoff_stage,
+)
 
 
 TOURNAMENT = ApiTournament(
@@ -107,6 +112,23 @@ class PlayoffStageTests(unittest.TestCase):
         self.assertEqual(rows[1]["PlayoffGameNumber"], 2)
         self.assertEqual((rows[1]["Player1"], rows[1]["GoalsPlayer1"], rows[1]["GoalsPlayer2"]), ("Astrid Lindqvist", 1, 4))
         self.assertEqual(rows[1]["Overtime"], "Yes")
+
+
+class DedupeTests(unittest.TestCase):
+    def test_source_match_ids_survive_numeric_round_trip(self):
+        stage_url = f"{RESULT_URL}kvalgrupper/grupp-1/?matcher=1"
+        base = resultat_api_scraper._row(
+            TOURNAMENT, stage_id=1, stage_name="Kvalgrupper - Grupp 1", stage_sequence=1, stage_type="round-robin",
+            stage_url=stage_url, source_stage_id=11218, source_match_id=443270, player1="A", player2="B",
+            goals1=1, goals2=2, sudden_death=False, round_number=1, playoff_game_number=None,
+        )
+        base["SourceMatchID"] = 443270.0
+        newer = dict(base, SourceMatchID="443270", GoalsPlayer1=3)
+
+        deduped = _deduplicate_results(pd.DataFrame([base, newer]))
+
+        self.assertEqual(len(deduped), 1)
+        self.assertEqual(deduped.iloc[0]["GoalsPlayer1"], 3)
 
 
 class MainTests(unittest.TestCase):

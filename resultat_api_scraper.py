@@ -1,7 +1,7 @@
 """
 Fetch tournament results from the JSON API behind resultat.bordshockey.se
-(resultat.bordshockey.net redirects there) and write them in the same CSV
-schema as bordshockey_scraper.py.
+(resultat.bordshockey.net redirects there) and write them in the same
+schema the bordshockey.net HTML scraper used (and the h2h site reads).
 
 The API reads the same database as bordshockey.net, so stage ids and match ids
 are the ones the HTML scraper finds in the page markup. API docs:
@@ -11,6 +11,8 @@ https://resultat.bordshockey.se/api-docs.html
 from __future__ import annotations
 
 import argparse
+import hashlib
+import os
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
@@ -20,23 +22,57 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
-from results_store import RESULTS_PATH, read_results
-
-from bordshockey_scraper import (
-    OUTPUT_COLUMNS,
-    SOURCE,
-    _apply_player_map,
-    _deduplicate_results,
-    _existing_result_urls,
-    _generate_id,
-    _load_existing_csv,
-    _load_player_map,
-    _needs_rebuild,
-    _write_results,
-)
+from results_store import RESULTS_PATH, read_results, results_exist, write_results
 
 API_BASE = "https://resultat.bordshockey.se/api"
 SITE_BASE = "https://bordshockey.net/tavlingar"
+SOURCE = "bordshockey.net"
+PLAYER_MAP_FILE = "player_id_map.csv"
+
+BASE_COLUMNS = [
+    "StageID",
+    "Player1",
+    "Player1ID",
+    "Player2",
+    "Player2ID",
+    "GoalsPlayer1",
+    "GoalsPlayer2",
+    "Overtime",
+    "Stage",
+    "RoundNumber",
+    "PlayoffGameNumber",
+    "Date",
+    "TournamentName",
+    "TournamentID",
+    "StageSequence",
+]
+
+ADDED_COLUMNS = [
+    "StageType",
+    "TournamentURL",
+    "ResultURL",
+    "StageURL",
+    "SourceURL",
+    "Source",
+    "SourceTournamentID",
+    "SourceStageID",
+    "SourceMatchID",
+]
+
+OUTPUT_COLUMNS = BASE_COLUMNS + ADDED_COLUMNS
+
+REQUIRED_POPULATED_COLUMNS = [
+    "StageID",
+    "TournamentID",
+    "StageSequence",
+    "StageType",
+    "TournamentURL",
+    "ResultURL",
+    "StageURL",
+    "SourceURL",
+    "Source",
+    "SourceTournamentID",
+]
 
 HEADERS = {"User-Agent": "bordshockey.net-scraper (+https://github.com/amundfylling/bordshockey.net-scraper)"}
 
@@ -60,6 +96,170 @@ class ApiTournament:
     @property
     def result_url(self) -> str:
         return f"{self.tournament_url}resultat/"
+
+
+# existing data
+
+def _generate_id(text: str) -> int:
+    """Generate a consistent integer ID from a string using MD5 and modulo."""
+    return int(hashlib.md5(text.encode("utf-8")).hexdigest(), 16) % (10**9)
+
+
+def _blankish(value: object) -> bool:
+    if value is None:
+        return True
+    try:
+        if pd.isna(value):
+            return True
+    except TypeError:
+        pass
+    return str(value).strip() == ""
+
+
+def _key_text(value: object) -> str | None:
+    if _blankish(value):
+        return None
+    if isinstance(value, float) and value.is_integer():
+        return str(int(value))
+    return str(value).strip()
+
+
+def _load_player_map(path: str = PLAYER_MAP_FILE) -> dict[str, object]:
+    player_map: dict[str, object] = {}
+    if not os.path.exists(path):
+        return player_map
+
+    try:
+        pm_df = pd.read_csv(path)
+        for name, player_id in zip(pm_df["ScrapedName"], pm_df["PlayerID"]):
+            player_map[str(name).strip()] = player_id
+        print(f"Loaded {len(player_map)} player mappings.")
+    except Exception as exc:
+        print(f"Warning: Could not load player map: {exc}", file=sys.stderr)
+
+    return player_map
+
+
+def _ensure_output_schema(df: pd.DataFrame) -> pd.DataFrame:
+    for col in OUTPUT_COLUMNS:
+        if col not in df.columns:
+            df[col] = None
+    return df[OUTPUT_COLUMNS].copy()
+
+
+def _needs_rebuild(df: pd.DataFrame) -> bool:
+    missing = [col for col in OUTPUT_COLUMNS if col not in df.columns]
+    if missing:
+        print(
+            f"Existing CSV is missing required columns ({', '.join(missing)}); rebuilding instead of appending.",
+            file=sys.stderr,
+        )
+        return True
+
+    for col in REQUIRED_POPULATED_COLUMNS:
+        # Vectorized equivalent of df[col].map(_blankish).any()
+        if df[col].isna().any() or df[col].astype(str).str.strip().eq("").any():
+            print(
+                f"Existing CSV has blank values in {col}; rebuilding instead of appending.",
+                file=sys.stderr,
+            )
+            return True
+
+    return False
+
+
+MATCH_TUPLE_KEY_COLUMNS = [
+    "TournamentID",
+    "StageID",
+    "StageURL",
+    "RoundNumber",
+    "PlayoffGameNumber",
+    "Player1",
+    "Player2",
+    "GoalsPlayer1",
+    "GoalsPlayer2",
+]
+
+
+def _dedupe_key_from_values(
+    source_match_id: object,
+    source: object,
+    source_tournament_id: object,
+    match_tuple: tuple[object, ...],
+) -> tuple[object, ...]:
+    source_match_id = _key_text(source_match_id)
+    if source_match_id is not None:
+        return (
+            "source-match",
+            _key_text(source),
+            _key_text(source_tournament_id),
+            source_match_id,
+        )
+
+    return ("match-tuple", *match_tuple)
+
+
+def _deduplicate_results(df: pd.DataFrame) -> pd.DataFrame:
+    if df.empty:
+        return _ensure_output_schema(df)
+
+    out = _ensure_output_schema(df)
+    # Column-wise zip instead of DataFrame.apply(axis=1): same keys, without building a Series per row.
+    keys = pd.Series(
+        [
+            _dedupe_key_from_values(smid, src, stid, match_tuple)
+            for smid, src, stid, match_tuple in zip(
+                out["SourceMatchID"],
+                out["Source"],
+                out["SourceTournamentID"],
+                zip(*(out[col] for col in MATCH_TUPLE_KEY_COLUMNS)),
+            )
+        ],
+        index=out.index,
+        dtype=object,
+    )
+    out = out.loc[~keys.duplicated(keep="last")].copy()
+    return out.reset_index(drop=True)
+
+
+def _apply_player_map(df: pd.DataFrame, player_map: dict[str, object]) -> pd.DataFrame:
+    if df.empty or not player_map:
+        return df
+
+    out = df.copy()
+    for player_col, id_col in (("Player1", "Player1ID"), ("Player2", "Player2ID")):
+        mapped = out[player_col].map(player_map)
+        if id_col in out.columns:
+            out[id_col] = mapped.combine_first(out[id_col])
+        else:
+            out[id_col] = mapped
+        out[id_col] = out[id_col].astype("Int64")
+
+    return out
+
+
+def _existing_result_urls(df: pd.DataFrame) -> set[str]:
+    if "ResultURL" not in df.columns:
+        return set()
+    return {str(url).strip() for url in df["ResultURL"].dropna().unique() if str(url).strip()}
+
+
+def _load_existing_csv(csv_file: str) -> pd.DataFrame:
+    if not results_exist(csv_file):
+        return pd.DataFrame(columns=OUTPUT_COLUMNS)
+    try:
+        df = read_results(csv_file)
+        print(f"Loaded {len(df)} existing rows.")
+        return df
+    except Exception as exc:
+        print(f"Warning: Could not read existing CSV: {exc}", file=sys.stderr)
+        return pd.DataFrame(columns=OUTPUT_COLUMNS)
+
+
+def _write_results(csv_file: str, df: pd.DataFrame) -> None:
+    final_df = _ensure_output_schema(df)
+    write_results(csv_file, final_df)
+    print(f"Wrote {csv_file}. Total rows: {len(final_df)}")
 
 
 # api
