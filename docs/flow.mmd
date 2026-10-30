@@ -1,0 +1,8 @@
+flowchart TD
+    API["resultat.bordshockey.net API"] -->|matches| Fetch["resultat_api_scraper.py"]
+    API -->|participant ITHF ids| Ids["fetch_api_player_ids.py"]
+    Scorpion["Scorpion player list<br/>(RankingID = ITHF id)"] --> Map
+    Fetch --> Map["map_players.py<br/>match players by ITHF id"]
+    Ids --> Map
+    Map --> CSV[("bordshockey_results.csv")]
+    CSV --> H2H["table-hockey-h2h site"]

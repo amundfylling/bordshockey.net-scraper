@@ -1,17 +1,8 @@
 # Bordshockey.net Scraper
 
-```mermaid
-flowchart LR
-    API["resultat.bordshockey.se API"] -->|matches| Fetch["resultat_api_scraper.py"]
-    API -->|participant ITHF ids| Ids["fetch_api_player_ids.py"]
-    Scorpion["Scorpion player list<br/>(RankingID = ITHF id)"] --> Map
-    Fetch --> Map["map_players.py<br/>match players by ITHF id"]
-    Ids --> Map
-    Map --> CSV[("bordshockey_results.csv")]
-    CSV --> H2H["table-hockey-h2h site"]
-```
+![Data flow: resultat API to fetcher and player mapping, then the results CSV that feeds the h2h site](docs/flow.svg)
 
-A GitHub Action runs this daily and commits the updated CSVs, which the [table-hockey-h2h site](https://github.com/amundfylling/table-hockey-h2h-cloudflare) reads.
+A GitHub Action runs this daily and commits the updated CSVs, which the [table-hockey-h2h site](https://github.com/amundfylling/table-hockey-h2h-cloudflare) reads. The diagram source is [`docs/flow.mmd`](docs/flow.mmd).
 
 This project scrapes table hockey tournament results from [bordshockey.net](https://bordshockey.net) and normalizes the data into a structured CSV format. It also includes a player mapping system to link scraped names to a canonical player database.
 
