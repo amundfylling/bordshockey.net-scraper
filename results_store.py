@@ -2,9 +2,7 @@
 Read and write the results dataset.
 
 The dataset lives in data/bordshockey_results.parquet (a few MB, where the CSV
-would be well over GitHub's 100 MB file limit). bordshockey_results.csv is the
-frozen legacy copy that older consumers still read: nothing writes it, and it is
-only read to seed the Parquet file when that does not exist yet.
+would be well over GitHub's 100 MB file limit).
 
 Any path ending in .csv is read and written as a plain CSV instead.
 """
@@ -16,7 +14,6 @@ import os
 import pandas as pd
 
 RESULTS_PATH = os.path.join("data", "bordshockey_results.parquet")
-LEGACY_CSV = "bordshockey_results.csv"
 
 INT_COLUMNS = [
     "StageID",
@@ -37,16 +34,8 @@ def _is_csv(path: str) -> bool:
     return path.lower().endswith(".csv")
 
 
-def _source(path: str) -> str | None:
-    if os.path.exists(path):
-        return path
-    if path == RESULTS_PATH and os.path.exists(LEGACY_CSV):
-        return LEGACY_CSV
-    return None
-
-
 def results_exist(path: str = RESULTS_PATH) -> bool:
-    return _source(path) is not None
+    return os.path.exists(path)
 
 
 def read_results(path: str = RESULTS_PATH, columns: list[str] | None = None, as_text: bool = False) -> pd.DataFrame:
@@ -54,16 +43,15 @@ def read_results(path: str = RESULTS_PATH, columns: list[str] | None = None, as_
     Read the dataset. as_text returns every column as str with "" for missing values.
     Raises FileNotFoundError when there is no dataset.
     """
-    source = _source(path)
-    if source is None:
+    if not os.path.exists(path):
         raise FileNotFoundError(path)
 
-    if _is_csv(source):
+    if _is_csv(path):
         if as_text:
-            return pd.read_csv(source, encoding="utf-8-sig", usecols=columns, dtype=str, keep_default_na=False)
-        return pd.read_csv(source, encoding="utf-8-sig", usecols=columns)
+            return pd.read_csv(path, encoding="utf-8-sig", usecols=columns, dtype=str, keep_default_na=False)
+        return pd.read_csv(path, encoding="utf-8-sig", usecols=columns)
 
-    df = pd.read_parquet(source, columns=columns)
+    df = pd.read_parquet(path, columns=columns)
     if as_text:
         df = df.astype("string").fillna("").astype(str)
     return df
