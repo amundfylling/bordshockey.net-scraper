@@ -1,9 +1,9 @@
-name: Weekly Scrape
+name: Daily Scrape
 
 on:
   schedule:
-    # Run at 18:00 UTC every Monday
-    - cron: '0 18 * * 1'
+    # Run at 18:00 UTC every day
+    - cron: '0 18 * * *'
   workflow_dispatch: # Allow manual trigger
 
 permissions:
@@ -26,8 +26,8 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Run Scraper
-        run: python bordshockey_scraper.py
+      - name: Fetch results from the resultat API
+        run: python resultat_api_scraper.py
 
       - name: Refresh Scorpion player data
         run: curl -fsSL -o players_data.csv https://raw.githubusercontent.com/amundfylling/Scorpion-Scraper-2.0/main/data/players_data.csv
@@ -43,5 +43,5 @@ jobs:
       - name: Commit and push changes
         uses: stefanzweifel/git-auto-commit-action@v4
         with:
-          commit_message: "chore: weekly data update"
+          commit_message: "chore: daily data update"
           file_pattern: "bordshockey_results.csv player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json"
