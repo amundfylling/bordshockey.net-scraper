@@ -27,7 +27,9 @@ jobs:
           pip install -r requirements.txt
 
       - name: Fetch results from the resultat API
-        run: python resultat_api_scraper.py
+        # Only the current season for now, so bordshockey_results.csv stays under
+        # GitHub's 100 MB file limit until the storage format changes.
+        run: python resultat_api_scraper.py --season current
 
       - name: Refresh Scorpion player data
         run: curl -fsSL -o players_data.csv https://raw.githubusercontent.com/amundfylling/Scorpion-Scraper-2.0/main/data/players_data.csv
