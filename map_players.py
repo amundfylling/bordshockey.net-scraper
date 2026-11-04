@@ -36,9 +36,10 @@ OUTPUT_MAPPING_CSV = "player_id_map.csv"
 ENTRY_MAPPING_CSV = "player_entry_map.csv"
 UNMAPPED_CSV = "unmapped_players.csv"
 # Players with an ITHF id but no Scorpion record get PlayerID = offset + ITHF id.
-# None leaves them unmapped. Scorpion PlayerIDs (< 20,000) and ITHF ids (< 1,000,000)
-# keep this range apart.
-ITHF_ONLY_ID_OFFSET = 1_000_000
+# None leaves them unmapped. 9,000,000 is the rule shared with table-hockey.eu and the
+# table-hockey-scrapers repo, so the same player gets the same id in every dataset.
+# Ids below 9,000,000 are real Scorpion PlayerIDs.
+ITHF_ONLY_ID_OFFSET = 9_000_000
 FUZZY_CUTOFF = 0.90
 # ---------------------
 
