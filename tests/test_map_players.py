@@ -75,7 +75,7 @@ class MapEntriesTests(unittest.TestCase):
         self.assertEqual(out["PlayerID"].tolist(), [4, 4])
 
     def test_accent_folded_name_beats_ithf_only_id(self):
-        out = mapped(entries(("t1", "Martin Vojacek", 5, "670657", None)), offset=1_000_000)
+        out = mapped(entries(("t1", "Martin Vojacek", 5, "670657", None)), offset=9_000_000)
         self.assertEqual((out["PlayerID"][0], out["Method"][0]), (7, "Folded"))
 
     def test_one_ithf_player_per_name_matched_profile(self):
@@ -91,10 +91,16 @@ class MapEntriesTests(unittest.TestCase):
         out = mapped(
             entries(("t1", "Kimmo Eriksson", 5, "280954", None), ("t1", "New Player", 5, "999", None)),
             manual={"ithf:280954": 3},
-            offset=1_000_000,
+            offset=9_000_000,
         )
-        self.assertEqual(out["PlayerID"].tolist(), [3, 1_000_999])
+        self.assertEqual(out["PlayerID"].tolist(), [3, 9_000_999])
         self.assertEqual(out["Method"].tolist(), ["Manual", "ITHF-only"])
+
+    def test_ithf_id_without_scorpion_record_gets_9_000_000_plus_ithf_id(self):
+        entry_df = entries(("t1", "Tomas Behr", 5, "70077", None))
+        name_map = map_names(["Tomas Behr"], GITHUB, {})
+        out = map_entries(entry_df, GITHUB, name_map, {})  # default offset
+        self.assertEqual((out["PlayerID"][0], out["Method"][0]), (9_070_077, "ITHF-only"))
 
     def test_apply_entry_map_sets_ids_per_tournament(self):
         results = pd.DataFrame(

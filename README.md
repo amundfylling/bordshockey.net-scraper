@@ -125,7 +125,9 @@ Name entries only apply to tournament entries without a usable ITHF id, and a na
 
 ### Players Scorpion does not have
 
-`ITHF_ONLY_ID_OFFSET` in `map_players.py` gives players with an ITHF id but no Scorpion record `PlayerID = offset + ITHF id`. It is 1,000,000; set it to `None` to leave them unmapped.
+`ITHF_ONLY_ID_OFFSET` in `map_players.py` gives players with an ITHF id but no Scorpion record `PlayerID = 9,000,000 + ITHF id` (for example ITHF 70077 becomes 9070077). This is the same rule table-hockey.eu and the table-hockey-scrapers repo use, so such a player has one id across all datasets. Ids below 9,000,000 are real Scorpion PlayerIDs. Set the offset to `None` to leave these players unmapped.
+
+These players used to get `1,000,000 + ITHF id`. `data/id_changes.csv` lists every id that changed (`old_id,new_id`) so old player links can be redirected.
 
 ## Automation
 
