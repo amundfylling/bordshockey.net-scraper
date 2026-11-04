@@ -2,7 +2,7 @@
 Compare two results files (.csv or .parquet) (e.g. the HTML scraper's and resultat_api_scraper.py's)
 and print where they differ.
 
-    python3 compare_results.py bordshockey_results.csv data/bordshockey_results.parquet
+    python3 compare_results.py old_results.csv data/bordshockey_results.parquet
 """
 
 from __future__ import annotations
