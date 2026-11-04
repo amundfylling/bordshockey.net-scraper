@@ -2,9 +2,7 @@
 Read and write the results dataset.
 
 The dataset lives in data/bordshockey_results.parquet (a few MB, where the CSV
-would be well over GitHub's 100 MB file limit). bordshockey_results.csv is the
-frozen legacy copy that older consumers still read: nothing writes it, and it is
-only read to seed the Parquet file when that does not exist yet.
+would be well over GitHub's 100 MB file limit).
 
 Any path ending in .csv is read and written as a plain CSV instead.
 """
@@ -16,7 +14,6 @@ import os
 import pandas as pd
 
 RESULTS_PATH = os.path.join("data", "bordshockey_results.parquet")
-LEGACY_CSV = "bordshockey_results.csv"
 
 INT_COLUMNS = [
     "StageID",
@@ -40,8 +37,6 @@ def _is_csv(path: str) -> bool:
 def _source(path: str) -> str | None:
     if os.path.exists(path):
         return path
-    if path == RESULTS_PATH and os.path.exists(LEGACY_CSV):
-        return LEGACY_CSV
     return None
 
 

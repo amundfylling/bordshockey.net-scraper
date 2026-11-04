@@ -1,11 +1,9 @@
 import os
 import tempfile
 import unittest
-from unittest import mock
 
 import pandas as pd
 
-import results_store
 from results_store import read_results, results_exist, write_results
 
 
@@ -45,20 +43,6 @@ class ResultsStoreTests(unittest.TestCase):
             write_results(path, read_results(path, as_text=True))
 
             pd.testing.assert_frame_equal(read_results(path), first)
-
-    def test_default_path_falls_back_to_legacy_csv(self):
-        with tempfile.TemporaryDirectory() as tmp:
-            parquet = os.path.join(tmp, "data", "results.parquet")
-            legacy = os.path.join(tmp, "legacy.csv")
-            _frame().to_csv(legacy, index=False, encoding="utf-8-sig")
-
-            with mock.patch.object(results_store, "RESULTS_PATH", parquet), mock.patch.object(
-                results_store, "LEGACY_CSV", legacy
-            ):
-                self.assertTrue(results_exist(parquet))
-                self.assertEqual(len(read_results(parquet)), 2)
-                write_results(parquet, read_results(parquet))
-                self.assertTrue(os.path.exists(parquet))
 
     def test_missing_dataset(self):
         with tempfile.TemporaryDirectory() as tmp:
