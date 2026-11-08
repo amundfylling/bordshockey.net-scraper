@@ -66,9 +66,15 @@ class MapEntriesTests(unittest.TestCase):
         self.assertEqual((out["PlayerID"][0], out["Method"][0]), (2, "ITHF"))
 
     def test_name_match_with_other_ranking_id_is_rejected(self):
-        out = mapped(entries(("t1", "Kimmo Eriksson", 5, "280954", None)))
+        # Scorpion's Kimmo Eriksson has RankingID 654720, which another player holds in the data.
+        out = mapped(entries(("t1", "Kimmo Eriksson", 5, "280954", None), ("t2", "Someone Else", 5, "654720", None)))
         self.assertTrue(pd.isna(out["PlayerID"][0]))
         self.assertEqual(out["Method"][0], "Conflict")
+
+    def test_unique_name_with_unused_ranking_id_beats_ithf_only(self):
+        # Like Alex Gorin: the API's ITHF id isn't Scorpion's RankingID, but nobody in the data has that RankingID.
+        out = mapped(entries(("t1", "Eriksson Kimmo", 5, "280954", None)), offset=9_000_000)
+        self.assertEqual((out["PlayerID"][0], out["Method"][0]), (3, "ScorpionName"))
 
     def test_name_match_without_ranking_id_is_kept(self):
         out = mapped(entries(("t1", "Erik Lund", 5, "123", None), ("t2", "Erik Lund", 1, None, None)))

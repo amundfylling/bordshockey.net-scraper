@@ -20,6 +20,13 @@ import pandas as pd
 import requests
 from tqdm import tqdm
 
+from clean_results import (
+    DEFAULT_COUNTRY,
+    country_name,
+    load_tournament_meta,
+    merge_tournament_meta,
+    save_tournament_meta,
+)
 from results_store import RESULTS_PATH, read_results
 
 from bordshockey_scraper import (
@@ -48,6 +55,9 @@ class ApiTournament:
     season: str
     permalink: str
     start_date: str
+    city: str = ""
+    nation: str = ""
+    class_name: str = ""
 
     @property
     def source_tournament_id(self) -> str:
@@ -84,6 +94,9 @@ def list_tournaments(session: requests.Session, season: str) -> list[ApiTourname
             season=t["season"],
             permalink=t["permalink"],
             start_date=t["startDate"] or "",
+            city=t.get("city") or "",
+            nation=t.get("nation") or "",
+            class_name=t.get("className") or "",
         )
         for t in _get_json(session, "/tournaments", {"season": season})
         if t.get("hasResults") and t.get("isFinished") and not t.get("external") and not t.get("isTeam")
@@ -107,6 +120,7 @@ def _row(
     goals1: int,
     goals2: int,
     sudden_death: bool,
+    walkover: bool,
     round_number: int,
     playoff_game_number: int | None,
 ) -> dict[str, object]:
@@ -135,7 +149,14 @@ def _row(
         "SourceTournamentID": tournament.source_tournament_id,
         "SourceStageID": source_stage_id,
         "SourceMatchID": source_match_id,
+        "Country": country_name(tournament.nation) or DEFAULT_COUNTRY,
+        "City": tournament.city or None,
+        "Walkover": "Yes" if walkover else "No",
     }
+
+
+def _walkover(match: dict) -> bool:
+    return bool(match.get("walkOver") or match.get("walkover"))
 
 
 def _played(match: dict) -> bool:
@@ -180,6 +201,7 @@ def rows_from_group_stage(
                         goals1=match["homeScore"],
                         goals2=match["awayScore"],
                         sudden_death=bool(match.get("suddenDeath")),
+                        walkover=_walkover(match),
                         round_number=match.get("round") or rnd["round"],
                         playoff_game_number=None,
                     )
@@ -223,6 +245,7 @@ def rows_from_playoff_stage(
                         goals1=g1,
                         goals2=g2,
                         sudden_death=bool(game.get("suddenDeath")),
+                        walkover=_walkover(game),
                         round_number=1,
                         playoff_game_number=game.get("round") or game_no,
                     )
@@ -271,6 +294,24 @@ def fetch_all(
     return pd.concat(frames, ignore_index=True) if frames else pd.DataFrame(columns=OUTPUT_COLUMNS)
 
 
+def tournament_meta(tournaments: list[ApiTournament]) -> pd.DataFrame:
+    """Rows for tournament_meta.csv, which clean_results.py reads for names, Country and City."""
+    return pd.DataFrame(
+        [
+            {
+                "SourceTournamentID": t.source_tournament_id,
+                "ApiTournamentID": str(t.id),
+                "Name": t.name,
+                "ClassName": t.class_name,
+                "Season": t.season,
+                "City": t.city,
+                "Nation": t.nation,
+            }
+            for t in tournaments
+        ]
+    )
+
+
 def discover_tournaments(session: requests.Session, seasons: Iterable[str] | None = None) -> list[ApiTournament]:
     found: list[ApiTournament] = []
     for season in seasons or list_seasons(session):
@@ -316,6 +357,7 @@ def main(argv: Iterable[str] | None = None) -> int:
 
     with requests.Session() as session:
         tournaments = discover_tournaments(session, seasons)
+    save_tournament_meta(merge_tournament_meta(load_tournament_meta(), tournament_meta(tournaments)))
     if only:
         tournaments = [t for t in tournaments if t.source_tournament_id in only]
 

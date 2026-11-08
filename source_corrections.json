@@ -1,0 +1,12 @@
+{
+  "comment": "Rows the source has wrong. clean_results.py applies these on every run. Each entry says why.",
+  "corrections": [
+    {
+      "SourceTournamentID": "0809/oresund-cup",
+      "SourceMatchID": "151148",
+      "where": {"Player1": "David Andersson", "Player2": "David Andersson"},
+      "action": "drop",
+      "reason": "The source stores this Kvalgrupp round 21 game as David Andersson (p1) against himself, 5-1, and lists only one David Andersson. The real opponent is unknown (David never meets Victor Enlund in the group, but Victor only played rounds 8-18), so the game is dropped rather than guessed."
+    }
+  ]
+}

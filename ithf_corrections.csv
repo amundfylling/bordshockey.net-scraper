@@ -1,0 +1,3 @@
+SourceTournamentID,PlayerName,ITHF,Reason
+2324/bthl-host-8,Marcus Lönnqvist,675314,"The API gives Marcus (SBHF 3152) ITHF 675313 here, which is Nils Kullberg Michels' id (he plays in this tournament too). At 2324/swedish-masters Marcus has 675314."
+2324/bthl-host-8,David Jangby Nyberg,675482,"The API gives David (SBHF 3153) ITHF 675314 here, Marcus Lönnqvist's id. 675482 is his ITHF id per the H2H data audit."
