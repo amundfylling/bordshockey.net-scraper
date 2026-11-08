@@ -29,6 +29,9 @@ jobs:
       - name: Fetch results from the resultat API
         run: python resultat_api_scraper.py
 
+      - name: Clean results (duplicates, overtime flags, names, Country/City)
+        run: python clean_results.py
+
       - name: Refresh Scorpion player data
         run: curl -fsSL -o players_data.csv https://raw.githubusercontent.com/amundfylling/Scorpion-Scraper-2.0/main/data/players_data.csv
         continue-on-error: true
@@ -40,12 +43,16 @@ jobs:
       - name: Run Player Mapping
         run: python map_players.py
 
+      - name: Check results
+        # Prints the counts and any self-matches or name conflicts; doesn't block the data commit.
+        run: python check_results.py
+
       - name: Commit and push changes
         # The branch can move while the fetch runs, so rebase onto it before pushing.
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add data/bordshockey_results.parquet player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json
+          git add data/bordshockey_results.parquet data/id_changes.csv player_id_map.csv player_entry_map.csv api_player_ids.csv players_data.csv unmapped_players.csv manual_mapping.json local_player_ids.csv tournament_meta.csv
           if git diff --cached --quiet; then
             echo "No data changes."
             exit 0

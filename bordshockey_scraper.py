@@ -56,6 +56,9 @@ ADDED_COLUMNS = [
     "SourceTournamentID",
     "SourceStageID",
     "SourceMatchID",
+    "Country",
+    "City",
+    "Walkover",
 ]
 
 OUTPUT_COLUMNS = BASE_COLUMNS + ADDED_COLUMNS
