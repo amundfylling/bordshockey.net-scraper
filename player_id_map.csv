@@ -39,6 +39,7 @@ Aleksandrs Andrejevs,8137.0,Exact,Aleksandrs Andrejevs
 Aleksandrs Arajevs,8094.0,Exact,Aleksandrs Arajevs
 Aleksandrs Babics,4876.0,Exact,Aleksandrs Babics
 Aleksandrs Bugo,7654.0,Exact,Aleksandrs Bugo
+Aleksandrs Goba,7893.0,Exact,Aleksandrs Goba
 Aleksandrs Lukjanovs,4879.0,Exact,Aleksandrs Lukjanovs
 Aleksandrs Nahtmanis,10754.0,Exact,Aleksandrs Nahtmanis
 Aleksandrs Ozernojs,5711.0,Exact,Aleksandrs Ozernojs
@@ -73,6 +74,7 @@ Alex Anttila,8361.0,Exact,Alex Anttila
 Alex Biorn,1468.0,Fuzzy,Alex Bjorn
 Alex Gorin,407.0,Exact,Alex Gorin
 Alexander Churilin,835.0,Exact,Alexander Churilin
+Alexander Dolgov,12665.0,Exact,Alexander Dolgov
 Alexander Duev,1088.0,Exact,Alexander Duev
 Alexander Enyushin,5440.0,Exact,Alexander Enyushin
 Alexander Galkin,9780.0,Exact,Alexander Galkin
@@ -81,6 +83,7 @@ Alexander Kaminski,5830.0,Exact,Alexander Kaminski
 Alexander Kolesnikov,7966.0,Exact,Alexander Kolesnikov
 Alexander Koroschenko,3984.0,Exact,Alexander Koroschenko
 Alexander Krivilev,7733.0,Fuzzy,Alexandr Krivilev
+Alexander Krivolapov,300.0,Exact,Alexander Krivolapov
 Alexander Kuznetsov,8540.0,Exact,Alexander Kuznetsov
 Alexander Larichev,386.0,Exact,Alexander Larichev
 Alexander Liljeholm,4135.0,Exact,Alexander Liljeholm
@@ -94,13 +97,16 @@ Alexander Okunev,165.0,Exact,Alexander Okunev
 Alexander Ozerov,148.0,Exact,Alexander Ozerov
 Alexander Plotnikov,296.0,Exact,Alexander Plotnikov
 Alexander Prokopov,2718.0,Exact,Alexander Prokopov
+Alexander Rylov,12103.0,Exact,Alexander Rylov
 Alexander Shapiro,346.0,Exact,Alexander Shapiro
 Alexander Shlykov,351.0,Exact,Alexander Shlykov
 Alexander Speranskiy,2388.0,Exact,Alexander Speranskiy
 Alexander Tikhonov,10505.0,Fuzzy,Alexandr Tikhonov
 Alexander Tkebuchava,8308.0,Exact,Alexander Tkebuchava
 Alexander Tsarev,5917.0,Exact,Alexander Tsarev
+Alexander Zaitsev,217.0,Fuzzy,Alexandr Zaytsev
 Alexander Zaytsev,217.0,Fuzzy,Alexandr Zaytsev
+Alexander Zhuliabin,659.0,Fuzzy,Alexandr Zhulyabin
 Alexandr Borovskiy,1899.0,Exact,Alexandr Borovskiy
 Alexandr Danilov,171.0,Exact,Alexandr Danilov
 Alexandr Dyomin,4062.0,Exact,Alexandr Dyomin
@@ -130,6 +136,7 @@ Alexey Klimko,185.0,Exact,Alexey Klimko
 Alexey Korotkiy,278.0,Exact,Alexey Korotkiy
 Alexey Kravchenko,2614.0,Exact,Alexey Kravchenko
 Alexey Krinov,1464.0,Exact,Alexey Krinov
+Alexey Lagutenkov,393.0,Exact,Alexey Lagutenkov
 Alexey Legostaev,1657.0,Exact,Alexey Legostaev
 Alexey Molodenkov,4280.0,Fuzzy,Aleksey Molodenkov
 Alexey Moshkov,3219.0,Exact,Alexey Moshkov
@@ -225,6 +232,7 @@ Andrey Erchov,9197.0,Fuzzy,Andrey Ershov
 Andrey Erhcov,9197.0,Fuzzy,Andrey Ershov
 Andrey Filyushin,5442.0,Exact,Andrey Filyushin
 Andrey Glebov,4741.0,Exact,Andrey Glebov
+Andrey Ilkin,2676.0,Fuzzy,Andrey Ilin
 Andrey Ivanchenko,12115.0,Exact,Andrey Ivanchenko
 Andrey Kalinkin,1371.0,Exact,Andrey Kalinkin
 Andrey Kolybelnikov,1022.0,Exact,Andrey Kolybelnikov
@@ -444,11 +452,13 @@ Daniel Wallén,,Manual,Daniel Wallén
 Daniela Polastikova,16433.0,Exact,Daniela Polastikova
 Daniella Lundin,6814.0,Exact,Daniella Lundin
 Daniels Vaiciulens,8101.0,Folded,Daniels Vaiciulens
+Daniil Jurchenko,209.0,Fuzzy,Daniil Yurchenko
 Daniil Kaznacheev,4651.0,Exact,Daniil Kaznacheev
 Daniil Landa,3266.0,Exact,Daniil Landa
 Daniil Moshnin,4197.0,Exact,Daniil Moshnin
 Daniil Mushnikov,9108.0,Exact,Daniil Mushnikov
 Daniil Perov,3289.0,Exact,Daniil Perov
+Daniil Shmeljev,280.0,Fuzzy,Daniil Shmeljov
 Daniil Tenitski,5685.0,Exact,Daniil Tenitski
 Daniil Yurchenko,209.0,Exact,Daniil Yurchenko
 Daniils Bažoks,4911.0,Exact,Daniils Bažoks
@@ -528,6 +538,7 @@ Dmitriy Fateyev,6344.0,Fuzzy,Dmitriy Fateev
 Dmitriy Fedorchenko,2174.0,Exact,Dmitriy Fedorchenko
 Dmitriy Koshman,225.0,Exact,Dmitriy Koshman
 Dmitriy Krylov,3965.0,Fuzzy,Dmitry Krylov
+Dmitriy Kulikovsky,293.0,Fuzzy,Dmitry Kulikovsky
 Dmitriy Lyapin,4797.0,Exact,Dmitriy Lyapin
 Dmitriy Nabasov,2438.0,Exact,Dmitriy Nabasov
 Dmitriy Petrov,218.0,Exact,Dmitriy Petrov
@@ -535,14 +546,18 @@ Dmitriy Sapozhnikov,3758.0,Exact,Dmitriy Sapozhnikov
 Dmitriy Shumilin,2486.0,Exact,Dmitriy Shumilin
 Dmitriy Soromotin,4952.0,Exact,Dmitriy Soromotin
 Dmitriy Uvarov,3092.0,Exact,Dmitriy Uvarov
+Dmitro Kudrytsky,1933.0,Fuzzy,Dmytro Kudrytsky
 Dmitry Afonin,421.0,Exact,Dmitry Afonin
 Dmitry Gerasimov,321.0,Exact,Dmitry Gerasimov
 Dmitry Krasyuk,6109.0,Exact,Dmitry Krasyuk
 Dmitry Lyapin,4797.0,Fuzzy,Dmitriy Lyapin
 Dmitry Malygin,388.0,Exact,Dmitry Malygin
 Dmitry Melnikov,9173.0,Exact,Dmitry Melnikov
+Dmitry Reshetnikov,446.0,Exact,Dmitry Reshetnikov
 Dmitry Soloviev,216.0,Exact,Dmitry Soloviev
+Dmitry Vasiljev,408.0,Fuzzy,Dmitry Vasilyev
 Dmitry Zhurba,299.0,Fuzzy,Dmitriy Zhurba
+Dmytro Bardievskiy,481.0,Fuzzy,Dmytro Bardiyevskyi
 Dmytro Bardievskyi,481.0,Fuzzy,Dmytro Bardiyevskyi
 Dmytro Chekmak,799.0,Exact,Dmytro Chekmak
 Dmytro Derkach,650.0,Exact,Dmytro Derkach
@@ -571,6 +586,7 @@ Edgars Putniņš,9323.0,Exact,Edgars Putniņš
 Edgars Saulitis,911.0,Folded,Edgars Saulitis
 Edgars Saulītis,911.0,Exact,Edgars Saulītis
 Edgars Vitols,2015.0,Folded,Edgars Vitols
+Edijs Bogdans,191.0,Exact,Edijs Bogdans
 Edijs Vavers,3653.0,Folded,Edijs Vavers
 Eduard Kuratnik,1786.0,Exact,Eduard Kuratnik
 Eduard Sazanov,4978.0,Fuzzy,Edward Sazanov
@@ -1103,6 +1119,7 @@ Karyna Pirumshoieva,11648.0,Fuzzy,Karina Pirumshoeva
 Kaspars Dubavs,3654.0,Exact,Kaspars Dubavs
 Kaspars Irbe,4411.0,Exact,Kaspars Irbe
 Kaspars Kuharjonoks,3643.0,Exact,Kaspars Kuharjonoks
+Kaspars Puikevics,3670.0,Exact,Kaspars Puikevics
 Kaspars Vilums,12517.0,Folded,Kaspars Vilums
 Kaspars Viļums,12517.0,Exact,Kaspars Viļums
 Kasper Risa Fylling,1944.0,Exact,Kasper Risa Fylling
@@ -1136,6 +1153,7 @@ Kirill Rogozin,1015.0,Exact,Kirill Rogozin
 Kirill Rudnev,433.0,Exact,Kirill Rudnev
 Kirill Storchak,46.0,Exact,Kirill Storchak
 Kirill Vasilev,1644.0,Exact,Kirill Vasilev
+Kirill Zaharenko,382.0,Exact,Kirill Zaharenko
 Kirills Jefimovs,4900.0,Exact,Kirills Jefimovs
 Kirills Sapega,10712.0,Exact,Kirills Sapega
 Kirills Smacko,8149.0,Folded,Kirills Smacko
@@ -1282,6 +1300,7 @@ Luukas Hämeenniemi,10111.0,Exact,Luukas Hämeenniemi
 László Altmann,5321.0,Folded,László Altmann
 Lāsma BEZDELĪGA,13407.0,Exact,Lāsma BEZDELĪGA
 Lūkass Jurka,9944.0,Exact,Lūkass Jurka
+Madars Balodis,7558.0,Exact,Madars Balodis
 Madars Irbe,4413.0,Exact,Madars Irbe
 Magda Milovanovic,4503.0,Exact,Magda Milovanovic
 Magdalena  Milovanovic,4761.0,Folded,Magdalena  Milovanovic
@@ -1611,6 +1630,7 @@ Nurmuhammed Seysen,2266.0,Exact,Nurmuhammed Seysen
 Nursultan Junisbekov,14293.0,Exact,Nursultan Junisbekov
 Nursultan Sarsenbekov,2544.0,Exact,Nursultan Sarsenbekov
 Nurtas Junisbekov,14304.0,Exact,Nurtas Junisbekov
+Oddbjorn By,1867.0,Exact,Oddbjorn By
 Oksana Derkach,3367.0,Exact,Oksana Derkach
 Oksana Korobkina,7878.0,Exact,Oksana Korobkina
 Ola Torgersen Bjorke,8988.0,Folded,Ola Torgersen Bjorke
@@ -1619,6 +1639,7 @@ Olavi Väisänen,4177.0,Folded,Olavi Väisänen
 Oleg Bondarenko,1411.0,Exact,Oleg Bondarenko
 Oleg Borisov,449.0,Exact,Oleg Borisov
 Oleg Bublikov,1664.0,Exact,Oleg Bublikov
+Oleg Bubnov,343.0,Exact,Oleg Bubnov
 Oleg Dmitrichenko,145.0,Exact,Oleg Dmitrichenko
 Oleg Maslov,9023.0,Exact,Oleg Maslov
 Oleg Matveev,1658.0,Exact,Oleg Matveev
@@ -1950,6 +1971,7 @@ Sergejs Bezenkovs,5712.0,Exact,Sergejs Bezenkovs
 Sergejs Bickovs,8089.0,Folded,Sergejs Bickovs
 Sergejs Mihejevs,1677.0,Exact,Sergejs Mihejevs
 Sergey Akchurin,2630.0,Exact,Sergey Akchurin
+Sergey Anisimov,11569.0,Exact,Sergey Anisimov
 Sergey Bulanov,3404.0,Exact,Sergey Bulanov
 Sergey Chaplygin,3280.0,Fuzzy,Sergey Chapligin
 Sergey Davydkin,4899.0,Exact,Sergey Davydkin
@@ -1971,6 +1993,7 @@ Sergey Nemolot,3298.0,Exact,Sergey Nemolot
 Sergey Oskin,652.0,Exact,Sergey Oskin
 Sergey Patekhin,349.0,Exact,Sergey Patekhin
 Sergey Petrenko,845.0,Exact,Sergey Petrenko
+Sergey Protasov,834.0,Exact,Sergey Protasov
 Sergey Pugachev,1463.0,Exact,Sergey Pugachev
 Sergey Sammal,932.0,Exact,Sergey Sammal
 Sergey Sayfulin,297.0,Fuzzy,Sergey Safiulin
@@ -2044,6 +2067,7 @@ Sven Edler,3357.0,Exact,Sven Edler
 Sven Nikolai Jensen,6675.0,Exact,Sven Nikolai Jensen
 Sven Pettersson,4927.0,Exact,Sven Pettersson
 Svetlana Jukama,10766.0,Folded,Svetlana Jukama
+Svjatoslav Kovalevskiy,441.0,Fuzzy,Svyatoslav Kovalevskiy
 Taisia Ankudimova,1367.0,Exact,Taisia Ankudimova
 Tamara Shalomayeva,599.0,Exact,Tamara Shalomayeva
 Tansholpan Kanataeva,2524.0,Exact,Tansholpan Kanataeva
@@ -2155,6 +2179,7 @@ Uriy Brezhnev,8360.0,Exact,Uriy Brezhnev
 Uros Bozinoski,14153.0,Folded,Uros Bozinoski
 Uros Matanovic,1236.0,Exact,Uros Matanovic
 Uroš Matanovic,1236.0,Folded,Uroš Matanovic
+Ustina Bubnova,344.0,Exact,Ustina Bubnova
 Uve Vikmanis,13408.0,Folded,Uve Vikmanis
 Vaclav Pikl,1218.0,Exact,Vaclav Pikl
 Vadim Babenko,8736.0,Exact,Vadim Babenko
@@ -2169,6 +2194,7 @@ Vadim Saks,5288.0,Exact,Vadim Saks
 Vadim Sitnikov,347.0,Exact,Vadim Sitnikov
 Vafa Hamdamov,690.0,Exact,Vafa Hamdamov
 Valentin Dietze,1621.0,Exact,Valentin Dietze
+Valentin Pavlov,14889.0,Exact,Valentin Pavlov
 Valentyn Korabel,478.0,Exact,Valentyn Korabel
 Valeri Trofimov,200.0,Exact,Valeri Trofimov
 Valeria Isakova,2562.0,Exact,Valeria Isakova
@@ -2184,6 +2210,7 @@ Valts Janvars,4420.0,Exact,Valts Janvars
 Valts SMAGARS,895.0,Exact,Valts SMAGARS
 Valts Smagars,895.0,Exact,Valts Smagars
 Vasiliy Lyutorovich,224.0,Exact,Vasiliy Lyutorovich
+Vasily Posrednikov,261.0,Exact,Vasily Posrednikov
 Vegard Flatoy,1433.0,Folded,Vegard Flatoy
 Vegard Flatøy,1433.0,Exact,Vegard Flatøy
 Vegard Klippen,2164.0,Exact,Vegard Klippen
@@ -2207,6 +2234,7 @@ Viktor Bobkov,2963.0,Exact,Viktor Bobkov
 Viktor Gomziakov,9534.0,Exact,Viktor Gomziakov
 Viktor Gomzyakov,9534.0,Fuzzy,Viktor Gomziakov
 Viktor Levdansky,509.0,Exact,Viktor Levdansky
+Viktor Mashcenko,2802.0,Fuzzy,Viktor Maschenko
 Viktor Svensson,6823.0,Exact,Viktor Svensson
 Viktor Velic,13588.0,Folded,Viktor Velic
 Viktoria Gorodnitskaya,270.0,Exact,Viktoria Gorodnitskaya
@@ -2250,6 +2278,7 @@ Vladimir Novikov,594.0,Exact,Vladimir Novikov
 Vladimir Opanasenko,2475.0,Exact,Vladimir Opanasenko
 Vladimir Orlov,5191.0,Exact,Vladimir Orlov
 Vladimir Otinov,3973.0,Exact,Vladimir Otinov
+Vladimir Potapov,5387.0,Exact,Vladimir Potapov
 Vladimir Prokushev,14273.0,Exact,Vladimir Prokushev
 Vladimir Salahov,14289.0,Exact,Vladimir Salahov
 Vladimir Sannikov,1075.0,Exact,Vladimir Sannikov
